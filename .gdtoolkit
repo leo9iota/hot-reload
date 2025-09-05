@@ -1,0 +1,24 @@
+[formatter]
+line_length = 100
+indent_size = 4
+continuation_indent_size = 8
+end_of_line = lf
+
+[linter]
+disable = [
+    # "unused-argument",
+    # "function-name",
+]
+
+# Custom rules
+max_file_lines = 1000
+max_line_length = 100
+max_public_methods = 20
+
+# Naming conventions
+class_name = "PascalCase"
+function_name = "snake_case"
+variable_name = "snake_case"
+signal_name = "snake_case"
+constant_name = "CONSTANT_CASE"
+enum_name = "PascalCase"
