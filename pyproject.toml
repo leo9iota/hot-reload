@@ -1,5 +1,5 @@
 [project]
-name = "hot-reloaded"
+name = "hot-reload"
 version = "0.0.0"
 description = "Dev tooling for formatting and linting GDScript"
 readme = "README.md"
