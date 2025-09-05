@@ -53,11 +53,11 @@ parse-file file:
     uv run gdparse "{{ file }}"
 
 # Format and lint everything (comprehensive check)
-check: format-check lint
+check: fmt-check lint
     @echo "All formatting and linting checks passed!"
 
 # Format everything and run comprehensive checks
-fix: format lint
+fix: fmt lint
     @echo "Fixed formatting and completed linting!"
 
 # Clean up Python cache and build artifacts
@@ -72,7 +72,7 @@ version:
     uv run gdlint --version
 
 # Format only changed files (git-aware, excluding addons)
-format-changed:
+fmt-changed:
     #!/usr/bin/env bash
     # export PYTHONWARNINGS="ignore::UserWarning:gdtoolkit.parser.parser"
     changed_files=$(git diff --name-only --diff-filter=AM | grep '\.gd$' | grep -v '^addons/' || true)
@@ -85,7 +85,7 @@ format-changed:
     fi
 
 # Check formatting only for changed files (excluding addons)
-format-check-changed:
+fmt-check-changed:
     #!/usr/bin/env bash
     # export PYTHONWARNINGS="ignore::UserWarning:gdtoolkit.parser.parser"
     changed_files=$(git diff --name-only --diff-filter=AM | grep '\.gd$' | grep -v '^addons/' || true)
@@ -111,7 +111,7 @@ lint-changed:
     fi
 
 # Pre-commit hook: format and check changed files
-pre-commit: format-changed lint-changed
+pre-commit: fmt-changed lint-changed
     @echo "🚀 Pre-commit checks completed!"
 
 # Show help for gdtoolkit commands
