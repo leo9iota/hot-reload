@@ -2,9 +2,68 @@
 .godot/
 /android/
 
+# Godot general ignores
+.import/
+export.cfg
+export_presets.cfg
+*.tmp
+.mono/
+data_*/
+mono_crash.*.json
+
 # Python virtual environment (managed by uv)
 .venv/
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
 
 # OS-specific
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs and temporary files
+*.log
+*.temp
+*.bak
+*.backup
+
+# Local configuration
+.env
+.env.local
+
+# Just build artifacts
+target/
+
+# gdtoolkit cache
+.gdscript_cache/
