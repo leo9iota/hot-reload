@@ -1,10 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://cv72gepsh2eqd"]
+[gd_scene load_steps=2 format=3 uid="uid://cv72gepsh2eqd"]
 
 [ext_resource type="Script" uid="uid://dsd8e3iodnvio" path="res://ui/main_menu.gd" id="1_t7e0r"]
-
-[sub_resource type="GDScript" id="GDScript_t7e0r"]
-script/source = "extends Button
-"
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -33,7 +29,6 @@ grow_vertical = 2
 layout_mode = 2
 text = "Host"
 
-[node name="PlayButton" type="Button" parent="HBoxContainer"]
+[node name="JoinButton" type="Button" parent="HBoxContainer"]
 layout_mode = 2
-text = "Play"
-script = SubResource("GDScript_t7e0r")
+text = "Join"
