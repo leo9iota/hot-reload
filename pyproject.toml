@@ -6,16 +6,12 @@ readme = "README.md"
 requires-python = ">=3.11"
 
 [dependency-groups]
-# Development-only tools managed by uv
-# - gdtoolkit provides:
-#   - gdformat: GDScript formatter
-#   - gdlint: GDScript linter
-# Pin the version to keep consistent results
+
 dev = [
-  "gdtoolkit==4.2.2",
+  "gdtoolkit==4.3.0",
+  "setuptools>=70.0.0",
 ]
 
 [tool.uv]
-# When running `uv sync` with no flags, install the dev tool group
 default-groups = ["dev"]
 
