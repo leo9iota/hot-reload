@@ -9,43 +9,48 @@ install:
 # Format all GDScript files using gdformat (excluding addons)
 format:
     #!/usr/bin/env bash
+    export PYTHONWARNINGS="ignore::UserWarning:gdtoolkit.parser.parser"
     find . -name "*.gd" -not -path "./addons/*" | xargs -r uv run gdformat
 
 # Format specific file or directory
 format-path path:
-    uv run gdformat "{{path}}"
+    uv run gdformat "{{ path }}"
 
 # Check formatting without making changes (dry run)
 format-check:
     #!/usr/bin/env bash
+    export PYTHONWARNINGS="ignore::UserWarning:gdtoolkit.parser.parser"
     find . -name "*.gd" -not -path "./addons/*" | xargs -r uv run gdformat --check
 
 # Check formatting for specific path
 format-check-path path:
-    uv run gdformat --check "{{path}}"
+    uv run gdformat --check "{{ path }}"
 
 # Format with specific line length (default is 100)
 format-line-length length="100":
     #!/usr/bin/env bash
-    find . -name "*.gd" -not -path "./addons/*" | xargs -r uv run gdformat --line-length {{length}}
+    export PYTHONWARNINGS="ignore::UserWarning:gdtoolkit.parser.parser"
+    find . -name "*.gd" -not -path "./addons/*" | xargs -r uv run gdformat --line-length {{ length }}
 
 # Lint GDScript files using gdlint (excluding addons)
 lint:
     #!/usr/bin/env bash
+    export PYTHONWARNINGS="ignore::UserWarning:gdtoolkit.parser.parser"
     find . -name "*.gd" -not -path "./addons/*" | xargs -r uv run gdlint
 
 # Lint specific file or directory
 lint-path path:
-    uv run gdlint "{{path}}"
+    uv run gdlint "{{ path }}"
 
-# Parse GDScript files to check syntax
+# Parse GDScript files to check syntax (excluding addons)
 parse:
     #!/usr/bin/env bash
-    find . -name "*.gd" -type f | xargs uv run gdparse
+    export PYTHONWARNINGS="ignore::UserWarning:gdtoolkit.parser.parser"
+    find . -name "*.gd" -not -path "./addons/*" | xargs -r uv run gdparse
 
 # Parse specific file
 parse-file file:
-    uv run gdparse "{{file}}"
+    uv run gdparse "{{ file }}"
 
 # Format and lint everything (comprehensive check)
 check: format-check lint
@@ -66,36 +71,39 @@ version:
     uv run gdformat --version
     uv run gdlint --version
 
-# Format only changed files (git-aware)
+# Format only changed files (git-aware, excluding addons)
 format-changed:
     #!/usr/bin/env bash
-    changed_files=$(git diff --name-only --diff-filter=AM | grep '\.gd$' || true)
+    export PYTHONWARNINGS="ignore::UserWarning:gdtoolkit.parser.parser"
+    changed_files=$(git diff --name-only --diff-filter=AM | grep '\.gd$' | grep -v '^addons/' || true)
     if [ -n "$changed_files" ]; then
-        echo "Formatting changed GDScript files:"
+        echo "Formatting changed GDScript files (excluding addons):"
         echo "$changed_files"
         echo "$changed_files" | xargs uv run gdformat
     else
         echo "No changed GDScript files to format"
     fi
 
-# Check formatting only for changed files
+# Check formatting only for changed files (excluding addons)
 format-check-changed:
     #!/usr/bin/env bash
-    changed_files=$(git diff --name-only --diff-filter=AM | grep '\.gd$' || true)
+    export PYTHONWARNINGS="ignore::UserWarning:gdtoolkit.parser.parser"
+    changed_files=$(git diff --name-only --diff-filter=AM | grep '\.gd$' | grep -v '^addons/' || true)
     if [ -n "$changed_files" ]; then
-        echo "Checking formatting for changed GDScript files:"
+        echo "Checking formatting for changed GDScript files (excluding addons):"
         echo "$changed_files"
         echo "$changed_files" | xargs uv run gdformat --check
     else
         echo "No changed GDScript files to check"
     fi
 
-# Lint only changed files
+# Lint only changed files (excluding addons)
 lint-changed:
     #!/usr/bin/env bash
-    changed_files=$(git diff --name-only --diff-filter=AM | grep '\.gd$' || true)
+    export PYTHONWARNINGS="ignore::UserWarning:gdtoolkit.parser.parser"
+    changed_files=$(git diff --name-only --diff-filter=AM | grep '\.gd$' | grep -v '^addons/' || true)
     if [ -n "$changed_files" ]; then
-        echo "Linting changed GDScript files:"
+        echo "Linting changed GDScript files (excluding addons):"
         echo "$changed_files"
         echo "$changed_files" | xargs uv run gdlint
     else
