@@ -6,8 +6,8 @@ end_of_line = lf
 
 [linter]
 disable = [
-    # "unused-argument",
-    # "function-name",
+    "unused-argument",
+    "function-name",
 ]
 
 # Custom rules
