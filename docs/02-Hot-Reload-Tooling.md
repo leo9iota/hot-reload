@@ -4,9 +4,9 @@ This project uses GDScript tools from [gdtoolkit](https://pypi.org/project/gdtoo
 
 ## Quick Setup
 
-1. **Install UV**:
+1. **Install UV and Just**:
 ```sh
-curl -LsSf https://astral.sh/uv/install.sh | sh
+curl -LsSf https://astral.sh/uv/install.sh | sh && pacman -S just
 ```
 
 2. **Install Dependencies**:
