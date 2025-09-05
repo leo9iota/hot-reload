@@ -1,5 +1,9 @@
 extends Control
 
+const PORT: int = 3000
+
+var main_scene: PackedScene = preload("uid://cpcymwvh3h4ny")
+
 @onready var host_button: Button = $HBoxContainer/HostButton
 @onready var join_button: Button = $HBoxContainer/JoinButton
 
@@ -7,11 +11,25 @@ extends Control
 func _ready() -> void:
 	host_button.pressed.connect(_on_host_pressed)
 	join_button.pressed.connect(_on_join_pressed)
+	multiplayer.peer_connected.connect(_on_peer_connected)
 
 
 func _on_host_pressed() -> void:
-	print("Host button pressed")
+	var server_peer := ENetMultiplayerPeer.new() 
+	server_peer.create_server(PORT)
+	multiplayer.multiplayer_peer = server_peer
+	get_tree().change_scene_to_packed(main_scene)
 
 
 func _on_join_pressed() -> void:
-	print("Play button pressed")
+	var client_peer := ENetMultiplayerPeer.new()
+	client_peer.create_client("127.0.0.1", PORT)
+	multiplayer.multiplayer_peer = client_peer
+	get_tree().change_scene_to_packed(main_scene)
+
+
+
+func _on_peer_connected(id: int):
+	# Print peer ID
+	print("My peer ID: %s" % multiplayer.get_unique_id())
+	print("Peer connected %s" % id)
