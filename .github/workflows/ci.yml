@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+    paths:
+    - "**/*.gd"
+    - "**/*.tscn"
+    - "pyproject.toml"
+    - ".editorconfig"
+    - ".github/workflows/ci.yml"
+    - "scripts/**"
+  pull_request:
+    branches: [ master ]
+    paths:
+    - "**/*.gd"
+    - "**/*.tscn"
+    - "pyproject.toml"
+    - ".editorconfig"
+    - ".github/workflows/ci.yml"
+    - "scripts/**"
+
+jobs:
+  tooling:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Setup uv
+      uses: astral-sh/setup-uv@v4
+
+    - name: Sync tooling environment
+      run: uv sync --group dev
+
+    - name: Check formatting
+      run: bash scripts/format-check.sh .
+
+    - name: Lint
+      run: bash scripts/lint.sh .
