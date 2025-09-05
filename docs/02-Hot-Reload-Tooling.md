@@ -16,66 +16,35 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 bash scripts/setup-tools.sh
 ```
 
+## Commands
 
-
----
-
-
-```sh
-
-```
+- **Setup Project**:
 
 ```sh
-
+just setup
 ```
 
-Prerequisites
+- **Format Code**:
 
-- Install uv (one-time):
-  - macOS/Linux:  curl -LsSf https://astral.sh/uv/install.sh | sh
-  - Windows (Git Bash):  curl -LsSf https://astral.sh/uv/install.sh | sh
-- Ensure uv --version works in your shell.
+```sh
+just fmt
+```
 
-Setup
+- **Check Formatting**:
 
-Create a local virtual environment and install dev tools specified in pyproject.toml:
+```sh
+just fmt-check
+```
 
-- bash scripts/setup-tools.sh
+- **Lint Code**:
 
-This creates .venv/ (ignored by Git) and installs gdtoolkit.
+```sh
+just lint
+```
 
-Usage
+- **Check Code**:
 
-- Format all GDScript files (in-place):
-  - bash scripts/format.sh [path]
-
-- Check formatting (no changes, CI-friendly):
-  - bash scripts/format-check.sh [path]
-
-- Lint GDScript:
-  - bash scripts/lint.sh [path]
-
-Each script accepts an optional path argument (defaults to .), e.g. bash scripts/lint.sh ui/
-
-Configuration
-
-- .editorconfig defines consistent indentation (4 spaces), EOLs, and trailing whitespace rules.
-- Tool versions are pinned in pyproject.toml under the dev dependency group.
-
-If you want to customize rules, gdlint and gdformat support configuration files. You can add them later as needed.
-
-Continuous Integration
-
-GitHub Actions workflow: .github/workflows/ci.yml
-
-- Installs uv
-- Syncs dev tools (uv sync --group dev)
-- Runs formatting check and linting
-- Triggers on pushes/PRs that change GDScript, scenes, scripts, or tooling files
-
-Troubleshooting
-
-- Ensure uv is on your PATH: uv --version
-- Recreate the environment: rm -rf .venv && uv sync
-- Run a tool directly without scripts: uv run gdformat . or uv run gdlint .
+```sh
+just check
+```
 
