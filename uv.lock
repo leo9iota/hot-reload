@@ -13,26 +13,27 @@ wheels = [
 
 [[package]]
 name = "docopt-ng"
-version = "0.8.1"
+version = "0.9.0"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/06/4c/91ac57392aae9e44cc159f1e41859b8c9c546ef0ecb94aaee126c3854d73/docopt-ng-0.8.1.tar.gz", hash = "sha256:ea6a61a288fc864eee6b22d6fe28aa202d59fc86fad05f16ff5e39cc4ea7f6e3", size = 29373, upload-time = "2022-05-31T19:57:34.909Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/e4/50/8d6806cf13138127692ae6ff79ddeb4e25eb3b0bcc3c1bd033e7e04531a9/docopt_ng-0.9.0.tar.gz", hash = "sha256:91c6da10b5bb6f2e9e25345829fb8278c78af019f6fc40887ad49b060483b1d7", size = 32264, upload-time = "2023-05-30T20:46:25.064Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/83/c8/062e71929385ac33c7530c426c1564966801e38fa9f637015b2477420b72/docopt_ng-0.8.1-py2.py3-none-any.whl", hash = "sha256:ea16004a8b6dd703ac9d8d2a432c5b5e793d7a946f1134a05859e298a7af53bb", size = 16848, upload-time = "2022-05-31T19:57:15.794Z" },
+    { url = "https://files.pythonhosted.org/packages/6c/4a/c3b77fc1a24510b08918b43a473410c0168f6e657118807015f1f1edceea/docopt_ng-0.9.0-py3-none-any.whl", hash = "sha256:bfe4c8b03f9fca424c24ee0b4ffa84bf7391cb18c29ce0f6a8227a3b01b81ff9", size = 16689, upload-time = "2023-05-30T20:46:45.294Z" },
 ]
 
 [[package]]
 name = "gdtoolkit"
-version = "4.2.2"
+version = "4.3.4"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "docopt-ng" },
     { name = "lark", extra = ["regex"] },
     { name = "pyyaml" },
     { name = "radon" },
+    { name = "setuptools" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/76/34/b132307d74f5fcb1250a9a29c2b0479a701b0fab9425acd0af3eba6453e8/gdtoolkit-4.2.2.tar.gz", hash = "sha256:2f85fde94b9dceb5d602361c2a00c75e15ae3145d84f3971f34f7479de4eec39", size = 42661, upload-time = "2023-12-11T21:49:36.651Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/8f/8c/ec8eb8e8264fedcfc1f30374b56083b917dd187a9e2452d38cabac69f515/gdtoolkit-4.3.4.tar.gz", hash = "sha256:42f8d528829a081809c8492c5936729b9fafca640fc46026ae98299fe0d3a93a", size = 48977, upload-time = "2025-06-29T13:03:53.149Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/80/f2/08745e13f1a90b8bae2b74c6aa599f68fd4f1d0fab9a3081382b8825b74f/gdtoolkit-4.2.2-py3-none-any.whl", hash = "sha256:f55df3cd6172fd925a6b2e78380b1a90b529586aab0128c01229979c4cd4d266", size = 56762, upload-time = "2023-12-11T21:49:35.401Z" },
+    { url = "https://files.pythonhosted.org/packages/59/67/de74cd511c66935008340ebfc1a3a1a631e01158376e675d84776143b8dc/gdtoolkit-4.3.4-py3-none-any.whl", hash = "sha256:b3ba44d81ae41f1fdcdc8b4a79bd7419bb7651cc0f8ed9c5ccab1ff18d2ba2d4", size = 61805, upload-time = "2025-06-29T13:03:52.191Z" },
 ]
 
 [[package]]
@@ -43,20 +44,24 @@ source = { virtual = "." }
 [package.dev-dependencies]
 dev = [
     { name = "gdtoolkit" },
+    { name = "setuptools" },
 ]
 
 [package.metadata]
 
 [package.metadata.requires-dev]
-dev = [{ name = "gdtoolkit", specifier = "==4.2.2" }]
+dev = [
+    { name = "gdtoolkit" },
+    { name = "setuptools" },
+]
 
 [[package]]
 name = "lark"
-version = "1.1.5"
+version = "1.2.2"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/a2/25/8e16de418fc83bb00dabaf8c7110bc45a90bf5481a70aa5f1668fcea73bc/lark-1.1.5.tar.gz", hash = "sha256:4b534eae1f9af5b4ea000bea95776350befe1981658eea3820a01c37e504bb4d", size = 246737, upload-time = "2022-12-06T12:50:52.354Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/af/60/bc7622aefb2aee1c0b4ba23c1446d3e30225c8770b38d7aedbfb65ca9d5a/lark-1.2.2.tar.gz", hash = "sha256:ca807d0162cd16cef15a8feecb862d7319e7a09bdb13aef927968e45040fed80", size = 252132, upload-time = "2024-08-13T19:49:00.652Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/ac/c7/25e678cb94ac2b7be741272d5b2ae099e32e23f36d820e6feb8931b12382/lark-1.1.5-py3-none-any.whl", hash = "sha256:8476f9903e93fbde4f6c327f74d79e9b4bd0ed9294c5dfa3164ab8c581b5de2a", size = 107959, upload-time = "2022-12-06T12:50:28.213Z" },
+    { url = "https://files.pythonhosted.org/packages/2d/00/d90b10b962b4277f5e64a78b6609968859ff86889f5b898c1a778c06ec00/lark-1.2.2-py3-none-any.whl", hash = "sha256:c2276486b02f0f1b90be155f2c8ba4a8e194d42775786db622faccd652d8e80c", size = 111036, upload-time = "2024-08-13T19:48:58.603Z" },
 ]
 
 [package.optional-dependencies]
@@ -186,6 +191,15 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/85/37/dc127703a9e715a284cc2f7dbdd8a9776fd813c85c126eddbcbdd1ca5fec/regex-2025.9.1-cp314-cp314-win32.whl", hash = "sha256:34679a86230e46164c9e0396b56cab13c0505972343880b9e705083cc5b8ec86", size = 269833, upload-time = "2025-09-01T22:09:39.245Z" },
     { url = "https://files.pythonhosted.org/packages/83/bf/4bed4d3d0570e16771defd5f8f15f7ea2311edcbe91077436d6908956c4a/regex-2025.9.1-cp314-cp314-win_amd64.whl", hash = "sha256:a1196e530a6bfa5f4bde029ac5b0295a6ecfaaffbfffede4bbaf4061d9455b70", size = 278742, upload-time = "2025-09-01T22:09:40.651Z" },
     { url = "https://files.pythonhosted.org/packages/cf/3e/7d7ac6fd085023312421e0d69dfabdfb28e116e513fadbe9afe710c01893/regex-2025.9.1-cp314-cp314-win_arm64.whl", hash = "sha256:f46d525934871ea772930e997d577d48c6983e50f206ff7b66d4ac5f8941e993", size = 271860, upload-time = "2025-09-01T22:09:42.413Z" },
+]
+
+[[package]]
+name = "setuptools"
+version = "80.9.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/18/5d/3bf57dcd21979b887f014ea83c24ae194cfcd12b9e0fda66b957c69d1fca/setuptools-80.9.0.tar.gz", hash = "sha256:f36b47402ecde768dbfafc46e8e4207b4360c654f1f3bb84475f0a28628fb19c", size = 1319958, upload-time = "2025-05-27T00:56:51.443Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/a3/dc/17031897dae0efacfea57dfd3a82fdd2a2aeb58e0ff71b77b87e44edc772/setuptools-80.9.0-py3-none-any.whl", hash = "sha256:062d34222ad13e0cc312a4c02d73f059e86a4acbfbdea8f8f76b28c99f306922", size = 1201486, upload-time = "2025-05-27T00:56:49.664Z" },
 ]
 
 [[package]]
