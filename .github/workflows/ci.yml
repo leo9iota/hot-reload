@@ -30,11 +30,14 @@ jobs:
     - name: Setup uv
       uses: astral-sh/setup-uv@v4
 
+    - name: Install just
+      uses: extractions/setup-just@v2
+
     - name: Sync tooling environment
       run: uv sync --group dev
 
     - name: Check formatting
-      run: bash scripts/format-check.sh .
+      run: just format-check
 
     - name: Lint
-      run: bash scripts/lint.sh .
+      run: just lint
