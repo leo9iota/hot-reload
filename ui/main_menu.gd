@@ -27,6 +27,5 @@ func _on_join_pressed() -> void:
 	multiplayer.multiplayer_peer = client_peer
 
 
-
 func _on_connected_to_server():
 	get_tree().change_scene_to_packed(main_scene)
