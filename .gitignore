@@ -1,3 +1,10 @@
 # Godot 4+ specific ignores
 .godot/
 /android/
+
+# Python virtual environment (managed by uv)
+.venv/
+
+# OS-specific
+.DS_Store
+Thumbs.db
