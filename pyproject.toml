@@ -8,8 +8,8 @@ requires-python = ">=3.11"
 [dependency-groups]
 
 dev = [
-  "gdtoolkit==4.3.0",
-  "setuptools>=70.0.0",
+  "gdtoolkit",
+  "setuptools",
 ]
 
 [tool.uv]
