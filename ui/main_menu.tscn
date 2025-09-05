@@ -1,4 +1,10 @@
-[gd_scene format=3 uid="uid://cv72gepsh2eqd"]
+[gd_scene load_steps=3 format=3 uid="uid://cv72gepsh2eqd"]
+
+[ext_resource type="Script" uid="uid://dsd8e3iodnvio" path="res://ui/main_menu.gd" id="1_t7e0r"]
+
+[sub_resource type="GDScript" id="GDScript_t7e0r"]
+script/source = "extends Button
+"
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -7,6 +13,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_t7e0r")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
@@ -29,3 +36,4 @@ text = "Host"
 [node name="PlayButton" type="Button" parent="HBoxContainer"]
 layout_mode = 2
 text = "Play"
+script = SubResource("GDScript_t7e0r")
