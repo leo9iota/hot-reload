@@ -7,27 +7,27 @@ install:
     uv sync
 
 # Format all GDScript files using gdformat (excluding addons)
-format:
+fmt:
     #!/usr/bin/env bash
     # export PYTHONWARNINGS="ignore::UserWarning:gdtoolkit.parser.parser"
     find . -name "*.gd" -not -path "./addons/*" | xargs -r uv run gdformat
 
 # Format specific file or directory
-format-path path:
+fmt-path path:
     uv run gdformat "{{ path }}"
 
 # Check formatting without making changes (dry run)
-format-check:
+fmt-check:
     #!/usr/bin/env bash
     # export PYTHONWARNINGS="ignore::UserWarning:gdtoolkit.parser.parser"
     find . -name "*.gd" -not -path "./addons/*" | xargs -r uv run gdformat --check
 
 # Check formatting for specific path
-format-check-path path:
+fmt-check-path path:
     uv run gdformat --check "{{ path }}"
 
 # Format with specific line length (default is 100)
-format-line-length length="100":
+fmt-line-length length="100":
     #!/usr/bin/env bash
     # export PYTHONWARNINGS="ignore::UserWarning:gdtoolkit.parser.parser"
     find . -name "*.gd" -not -path "./addons/*" | xargs -r uv run gdformat --line-length {{ length }}
