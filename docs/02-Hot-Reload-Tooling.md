@@ -1,50 +1,49 @@
 # Hot Reload Tooling
 
-This project uses modern Python tooling via [uv](https://docs.astral.sh/uv/) to install and run GDScript tools from [gdtoolkit](https://pypi.org/project/gdtoolkit/3.3.0/).
+This project uses GDScript tools from [gdtoolkit](https://pypi.org/project/gdtoolkit/).
 
-## Setup
+## Quick Setup
 
-1. **Install Prerequisites**: Install [uv](https://docs.astral.sh/uv/) with curl.
-
+1. **Install UV**:
 ```sh
 curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
-2. **Setup**: Create a local virtual environment and install dev tools specified in [pyproject.toml](../pyproject.toml).
-
+2. **Install Dependencies**:
 ```sh
-bash scripts/setup-tools.sh
+just install
 ```
 
-## Commands
+## Available Commands
 
-- **Setup Project**:
+### Core Commands
+- **`just install`**: Install all dependencies
+- **`just format`**: Format all GDScript files (excludes addons)
+- **`just lint`**: Lint all GDScript files (excludes addons)
+- **`just check`**: Check formatting and run linting
+- **`just fix`**: Format code and run linting
 
-```sh
-just setup
-```
+### Smart Git-Aware Commands
+- **`just format-changed`**: Format only changed files
+- **`just lint-changed`**: Lint only changed files  
+- **`just pre-commit`**: Perfect for git pre-commit hooks
 
-- **Format Code**:
+### Utility Commands
+- **`just version`**: Show gdtoolkit versions
+- **`just clean`**: Clean Python cache files
+- **`just count-gd-files`**: Count GDScript files in project
 
-```sh
-just fmt
-```
-
-- **Check Formatting**:
-
-```sh
-just fmt-check
-```
-
-- **Lint Code**:
-
-```sh
-just lint
-```
-
-- **Check Code**:
+## Typical Workflow
 
 ```sh
-just check
-```
+# One-time setup
+just install
 
+# During development
+just format          # Format your code
+just lint            # Check for issues
+just check           # Comprehensive check
+
+# Before committing
+just pre-commit      # Format and lint only changed files
+```
