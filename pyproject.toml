@@ -14,8 +14,3 @@ dev = [
 
 [tool.uv]
 default-groups = ["dev"]
-
-[tool.gdformat]
-line_length = 50
-indent_size = 4
-use_tabs = true
