@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bq3ewxhqr2hif"]
 
-[ext_resource type="Script" uid="uid://b1w3jvwkg2b5o" path="res://entities/player/player.gd" id="1_8afob"]
+[ext_resource type="Script" uid="uid://b1w3jvwkg2b5o" path="res://core/player/player.gd" id="1_8afob"]
 [ext_resource type="PackedScene" uid="uid://chrpq8nnc1hue" path="res://components/player_input_synchronizer_component.tscn" id="2_abrql"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_x7p2l"]
