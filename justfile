@@ -9,20 +9,20 @@ install:
 # Format all GDScript files using gdformat (excluding addons)
 fmt:
     #!/usr/bin/env bash
-    find . -name "*.gd" -not -path "./addons/*" | xargs -r uv run gdformat --line-length 100
+    find . -name "*.gd" -not -path "./addons/*" | xargs -r uv run gdformat --line-length 120
 
 # Format specific file or directory
 fmt-path path:
-    uv run gdformat --line-length 100 "{{ path }}"
+    uv run gdformat --line-length 120 "{{ path }}"
 
 # Check formatting without making changes (dry run)
 fmt-check:
     #!/usr/bin/env bash
-    find . -name "*.gd" -not -path "./addons/*" | xargs -r uv run gdformat --line-length 100 --check
+    find . -name "*.gd" -not -path "./addons/*" | xargs -r uv run gdformat --line-length 120 --check
 
 # Check formatting for specific path
 fmt-check-path path:
-    uv run gdformat --line-length 100 --check "{{ path }}"
+    uv run gdformat --line-length 120 --check "{{ path }}"
 
 # Format with specific line length (default is 80)
 fmt-line-length length="80":
@@ -73,7 +73,7 @@ fmt-changed:
     if [ -n "$changed_files" ]; then
         echo "Formatting changed GDScript files (excluding addons):"
         echo "$changed_files"
-        echo "$changed_files" | xargs uv run gdformat --line-length 100
+        echo "$changed_files" | xargs uv run gdformat --line-length 120
     else
         echo "No changed GDScript files to format"
     fi
@@ -85,7 +85,7 @@ fmt-check-changed:
     if [ -n "$changed_files" ]; then
         echo "Checking formatting for changed GDScript files (excluding addons):"
         echo "$changed_files"
-        echo "$changed_files" | xargs uv run gdformat --line-length 100 --check
+        echo "$changed_files" | xargs uv run gdformat --line-length 120 --check
     else
         echo "No changed GDScript files to check"
     fi
