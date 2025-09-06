@@ -9,4 +9,6 @@ func _process(_delta: float) -> void:
 
 
 func get_input():
-	movement_vector = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	movement_vector = Input.get_vector(
+		"move_left", "move_right", "move_up", "move_down"
+	)
