@@ -5,10 +5,11 @@ var player_scene: PackedScene = preload("uid://bq3ewxhqr2hif")
 @onready var multiplayer_spawner: MultiplayerSpawner = $MultiplayerSpawner
 
 
-func _ready() -> void:
+func _ready():
 	multiplayer_spawner.spawn_function = func(data):
-		var player = player_scene.instantiate()
+		var player = player_scene.instantiate() as Player
 		player.name = str(data.peer_id)
+		player.input_multiplayer_authority = data.peer_id
 		return player
 
 	peer_ready.rpc_id(1)

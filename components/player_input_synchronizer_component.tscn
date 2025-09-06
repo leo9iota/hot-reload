@@ -3,7 +3,11 @@
 [ext_resource type="Script" uid="uid://8yrm6c5vbfth" path="res://components/player_input_synchronizer_component.gd" id="1_04xrf"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_y14jc"]
+properties/0/path = NodePath(".:movement_vector")
+properties/0/spawn = true
+properties/0/replication_mode = 2
 
 [node name="PlayerInputSynchronizerComponent" type="MultiplayerSynchronizer"]
+root_path = NodePath(".")
 replication_config = SubResource("SceneReplicationConfig_y14jc")
 script = ExtResource("1_04xrf")
