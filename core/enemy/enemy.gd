@@ -8,11 +8,12 @@ var current_health: int = 5
 func _ready() -> void:
 	area_2d.area_entered.connect(_on_area_entered)
 
+
 func handle_hit():
 	current_health -= 1
 	if current_health <= 0:
 		queue_free()
-	
+
 
 func _on_area_entered(other_area: Area2D):
 	if not is_multiplayer_authority():
