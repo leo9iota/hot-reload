@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://cpcymwvh3h4ny"]
+[gd_scene load_steps=6 format=3 uid="uid://cpcymwvh3h4ny"]
 
 [ext_resource type="Script" uid="uid://dxt7wy02xkq4o" path="res://main.gd" id="1_ig7tw"]
 [ext_resource type="Texture2D" uid="uid://u3ti0f3pau7h" path="res://assets/environment/arena.png" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://bf7trdkyj6jdh" path="res://manager/enemy_manager.tscn" id="2_h2yge"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h2yge"]
 size = Vector2(32, 300)
@@ -11,6 +12,9 @@ size = Vector2(500, 32)
 
 [node name="Main" type="Node"]
 script = ExtResource("1_ig7tw")
+
+[node name="EnemyManager" parent="." node_paths=PackedStringArray("enemy_spawn_root") instance=ExtResource("2_h2yge")]
+enemy_spawn_root = NodePath("..")
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("uid://clscgesvupype", "uid://c3nm61v3vr63j")
