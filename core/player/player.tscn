@@ -22,6 +22,8 @@ aim_root = NodePath("../WeaponRoot")
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_h46vi")
 
+[node name="Timer" type="Timer" parent="."]
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("3_ll17t")
 centered = false
