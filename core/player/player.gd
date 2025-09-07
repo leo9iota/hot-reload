@@ -26,5 +26,5 @@ func _process(delta: float) -> void:
 func create_bullet():
 	var bullet = bullet_scene.instantiate() as Bullet
 	bullet.global_position = weapon_root.global_position
-	get_parent().add_child(bullet, true)
 	bullet.start(player_input_synchronizer_component.aim_vector)
+	get_parent().add_child(bullet, true)
