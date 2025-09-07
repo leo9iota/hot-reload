@@ -8,7 +8,7 @@ func _ready() -> void:
 
 
 func _on_area_entered(other_area: Area2D):
-	if !is_multiplayer_authority():
+	if not is_multiplayer_authority():
 		return
 
 	if other_area.owner is Bullet:

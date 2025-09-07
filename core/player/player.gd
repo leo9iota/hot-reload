@@ -25,7 +25,7 @@ func _process(delta: float) -> void:
 
 
 func try_create_bullet():
-	if !fire_rate_timer.is_stopped():
+	if not fire_rate_timer.is_stopped():
 		return
 
 	var bullet = bullet_scene.instantiate() as Bullet
