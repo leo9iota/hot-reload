@@ -1,6 +1,9 @@
 class_name PlayerInputSynchronizerComponent extends MultiplayerSynchronizer
 
+@export var aim_root: Node2D
+
 var movement_vector: Vector2 = Vector2.ZERO
+var aim_vector: Vector2 = Vector2.RIGHT
 
 
 func _process(_delta: float) -> void:
