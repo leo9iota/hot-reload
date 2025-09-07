@@ -61,6 +61,7 @@ attack={
 
 [layer_names]
 
+2d_physics/layer_1="Ground"
 2d_physics/layer_9="Bullet"
 
 [rendering]
