@@ -1,8 +1,7 @@
 name: Deploy to GitHub Pages
 
 on:
-  push:
-    branches: [ main, master ]
+  # Only manual trigger, no automatic deployment
   workflow_dispatch:
 
 

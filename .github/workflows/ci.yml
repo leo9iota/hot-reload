@@ -1,10 +1,9 @@
 name: CI
 
 on:
-  push:
-    branches: [ main, master, develop ]
-  pull_request:
-    branches: [ main, master, develop ]
+  # Only manual trigger, no automatic runs
+  workflow_dispatch:
+
 
 env:
   GODOT_VERSION: 4.4-stable
