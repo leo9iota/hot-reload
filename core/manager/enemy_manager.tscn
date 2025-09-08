@@ -8,6 +8,7 @@ script = ExtResource("1_8jwoc")
 enemy_scene = ExtResource("2_46ilc")
 
 [node name="RoundTimer" type="Timer" parent="."]
+one_shot = true
 
 [node name="SpawnIntervalTimer" type="Timer" parent="."]
-autostart = true
+one_shot = true
