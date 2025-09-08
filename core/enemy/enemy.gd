@@ -10,7 +10,7 @@ var target_position: Vector2
 func _ready() -> void:
 	area_2d.area_entered.connect(_on_area_entered)
 	target_acquisition_timer.timeout.connect(_on_target_acquisition_timer_timeout)
-	
+
 	if is_multiplayer_authority():
 		acquire_target()
 
