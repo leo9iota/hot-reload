@@ -27,6 +27,9 @@ replication_config = SubResource("SceneReplicationConfig_6eu31")
 wait_time = 0.2
 autostart = true
 
+[node name="HealthComponent" parent="." instance=ExtResource("3_5mk0m")]
+max_health = 2
+
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(0, -12)
 collision_layer = 0
@@ -43,5 +46,3 @@ offset = Vector2(-8, -23)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -4)
 shape = SubResource("CircleShape2D_5yaqm")
-
-[node name="HealthComponent" parent="." instance=ExtResource("3_5mk0m")]
