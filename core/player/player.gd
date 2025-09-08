@@ -13,7 +13,7 @@ func _ready():
 	player_input_synchronizer_component.set_multiplayer_authority(input_multiplayer_authority)
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var aim_position = weapon_root.global_position + player_input_synchronizer_component.aim_vector
 	weapon_root.look_at(aim_position)
 
