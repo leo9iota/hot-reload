@@ -32,8 +32,8 @@ func acquire_target():
 	var players = get_tree().get_nodes_in_group("player")  # Return all nodes as an array that exist in the scene group "player"
 
 	# Find player that is closest to that enemy instance
-	var nearest_player: Player
-	var nearest_squared_distance: float
+	var nearest_player: Player = null
+	var nearest_squared_distance: float = 0.0
 
 	for player in players:
 		if nearest_player == null:
