@@ -15,7 +15,7 @@ func _ready() -> void:
 		acquire_target()
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	# Only set velocity and move enemy if we're on the server-side
 	if is_multiplayer_authority():
 		velocity = global_position.direction_to(target_position) * 50
