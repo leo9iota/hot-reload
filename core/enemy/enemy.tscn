@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://c3nm61v3vr63j"]
+[gd_scene load_steps=7 format=3 uid="uid://c3nm61v3vr63j"]
 
 [ext_resource type="Texture2D" uid="uid://ca0wvkeeaehjo" path="res://assets/enemy/enemy_medium.png" id="1_5yaqm"]
 [ext_resource type="Script" uid="uid://cspxds6vsxy0o" path="res://core/enemy/enemy.gd" id="1_6eu31"]
+[ext_resource type="PackedScene" uid="uid://u8l6rwxgkf8d" path="res://components/health/health_component.tscn" id="3_5mk0m"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_6eu31"]
 properties/0/path = NodePath(".:global_position")
@@ -42,3 +43,5 @@ offset = Vector2(-8, -23)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -4)
 shape = SubResource("CircleShape2D_5yaqm")
+
+[node name="HealthComponent" parent="." instance=ExtResource("3_5mk0m")]
