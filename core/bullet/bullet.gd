@@ -18,7 +18,7 @@ func _process(delta: float) -> void:
 
 
 func start(initial_direction: Vector2):
-	self.direction = initial_direction
+	direction = initial_direction
 	rotation = initial_direction.angle()
 
 
