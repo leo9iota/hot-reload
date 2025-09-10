@@ -5,6 +5,7 @@ class_name Player extends CharacterBody2D
 @onready var fire_rate_timer: Timer = $FireRateTimer
 @onready var health_component: HealthComponent = $HealthComponent
 @onready var visuals: Node2D = $Visuals
+@onready var recoil_animation: AnimationPlayer = $RecoilAnimation
 
 var bullet_scene: PackedScene = preload("uid://clscgesvupype")
 var input_multiplayer_authority: int
@@ -21,7 +22,7 @@ func _process(_delta: float) -> void:
 		velocity = player_input_synchronizer_component.movement_vector * 100
 		move_and_slide()
 		if player_input_synchronizer_component.is_attack_pressed:
-			nigger()
+			try_fire_bullet()
 
 
 func update_aim_position():
@@ -32,7 +33,7 @@ func update_aim_position():
 	weapon_root.look_at(aim_position)
 
 
-func nigger():
+func try_fire_bullet():
 	if not fire_rate_timer.is_stopped():
 		return
 
@@ -41,6 +42,11 @@ func nigger():
 	bullet.start(player_input_synchronizer_component.aim_vector)
 	get_parent().add_child(bullet, true)
 	fire_rate_timer.start()
+	
+	if recoil_animation.is_playing():
+		recoil_animation.stop()
+	
+	recoil_animation.play("fire")
 
 
 func _on_died():
