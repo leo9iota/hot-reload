@@ -8,6 +8,7 @@ class_name Player extends CharacterBody2D
 @onready var recoil_animation: AnimationPlayer = $RecoilAnimation
 
 var bullet_scene: PackedScene = preload("uid://clscgesvupype")
+var muzzle_flash_scene: PackedScene = preload("uid://drj72jf88qsqe")
 var input_multiplayer_authority: int
 
 
