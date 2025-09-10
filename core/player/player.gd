@@ -42,10 +42,10 @@ func try_fire_bullet():
 	bullet.start(player_input_synchronizer_component.aim_vector)
 	get_parent().add_child(bullet, true)
 	fire_rate_timer.start()
-	
+
 	if recoil_animation.is_playing():
 		recoil_animation.stop()
-	
+
 	recoil_animation.play("fire")
 
 
