@@ -15,7 +15,7 @@ script = ExtResource("1_ig7tw")
 
 [node name="EnemyManager" parent="." node_paths=PackedStringArray("enemy_spawn_root", "spawn_rect") instance=ExtResource("2_h2yge")]
 enemy_spawn_root = NodePath("../YSortRoot")
-spawn_rect = NodePath("../SpawnRect")
+spawn_rect = NodePath("../EnemySpawnArea")
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("uid://clscgesvupype", "uid://c3nm61v3vr63j")
@@ -30,7 +30,7 @@ position = Vector2(320, 185)
 texture = ExtResource("2_0xm2m")
 metadata/_edit_lock_ = true
 
-[node name="SpawnRect" type="ReferenceRect" parent="."]
+[node name="EnemySpawnArea" type="ReferenceRect" parent="."]
 custom_minimum_size = Vector2(414, 216)
 offset_left = 113.0
 offset_top = 73.0
