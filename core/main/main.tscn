@@ -81,3 +81,5 @@ metadata/_edit_lock_ = true
 [node name="YSortRoot" type="Node2D" parent="."]
 y_sort_enabled = true
 metadata/_edit_lock_ = true
+
+[node name="GameUI" type="CanvasLayer" parent="."]
