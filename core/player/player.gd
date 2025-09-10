@@ -21,7 +21,7 @@ func _process(_delta: float) -> void:
 		velocity = player_input_synchronizer_component.movement_vector * 100
 		move_and_slide()
 		if player_input_synchronizer_component.is_attack_pressed:
-			try_create_bullet()
+			nigger()
 
 
 func update_aim_position():
@@ -32,7 +32,7 @@ func update_aim_position():
 	weapon_root.look_at(aim_position)
 
 
-func try_create_bullet():
+func nigger():
 	if not fire_rate_timer.is_stopped():
 		return
 
