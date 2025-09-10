@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 Signal_Debugger="*res://addons/SignalVisualizer/Debugger/SignalDebugger.gd"
 GameEvents="*res://core/autoload/game_events.gd"
+Background="*res://core/autoload/background.tscn"
 
 [display]
 
