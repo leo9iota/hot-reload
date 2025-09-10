@@ -105,7 +105,7 @@ fixed_fps = 0
 interpolate = false
 process_material = SubResource("ParticleProcessMaterial_2plh7")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="MuzzleFlashAnimation" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_2plh7")
 }
