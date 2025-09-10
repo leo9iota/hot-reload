@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://c3nm61v3vr63j"]
+[gd_scene load_steps=8 format=3 uid="uid://c3nm61v3vr63j"]
 
 [ext_resource type="Texture2D" uid="uid://ca0wvkeeaehjo" path="res://assets/enemy/enemy_medium.png" id="1_5yaqm"]
 [ext_resource type="Script" uid="uid://cspxds6vsxy0o" path="res://core/enemy/enemy.gd" id="1_6eu31"]
+[ext_resource type="PackedScene" uid="uid://cpvn3uop4kkty" path="res://components/hurtbox/hurtbox_component.tscn" id="3_2nsib"]
 [ext_resource type="PackedScene" uid="uid://u8l6rwxgkf8d" path="res://components/health/health_component.tscn" id="3_5mk0m"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_6eu31"]
@@ -9,7 +10,7 @@ properties/0/path = NodePath(".:global_position")
 properties/0/spawn = true
 properties/0/replication_mode = 1
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5yaqm"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5g8uy"]
 size = Vector2(16, 24)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5yaqm"]
@@ -30,13 +31,12 @@ autostart = true
 [node name="HealthComponent" parent="." instance=ExtResource("3_5mk0m")]
 max_health = 2
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_2nsib")]
 position = Vector2(0, -12)
-collision_layer = 0
-collision_mask = 256
+health_component = NodePath("../HealthComponent")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("RectangleShape2D_5yaqm")
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="HurtboxComponent"]
+shape = SubResource("RectangleShape2D_5g8uy")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_5yaqm")
