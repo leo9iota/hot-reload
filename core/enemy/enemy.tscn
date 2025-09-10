@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://c3nm61v3vr63j"]
+[gd_scene load_steps=10 format=3 uid="uid://c3nm61v3vr63j"]
 
 [ext_resource type="Texture2D" uid="uid://ca0wvkeeaehjo" path="res://assets/enemy/enemy_medium.png" id="1_5yaqm"]
 [ext_resource type="Script" uid="uid://cspxds6vsxy0o" path="res://core/enemy/enemy.gd" id="1_6eu31"]
 [ext_resource type="PackedScene" uid="uid://cpvn3uop4kkty" path="res://components/hurtbox/hurtbox_component.tscn" id="3_2nsib"]
 [ext_resource type="PackedScene" uid="uid://u8l6rwxgkf8d" path="res://components/health/health_component.tscn" id="3_5mk0m"]
+[ext_resource type="PackedScene" uid="uid://bx1dq7x4jqnr3" path="res://components/hitbox/hitbox_component.tscn" id="5_5g8uy"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_6eu31"]
 properties/0/path = NodePath(".:global_position")
@@ -15,6 +16,9 @@ size = Vector2(16, 24)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5yaqm"]
 radius = 4.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tdoai"]
+size = Vector2(10, 14)
 
 [node name="Enemy" type="CharacterBody2D"]
 collision_layer = 0
@@ -46,3 +50,10 @@ offset = Vector2(-8, -23)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -4)
 shape = SubResource("CircleShape2D_5yaqm")
+
+[node name="HitboxComponent" parent="." instance=ExtResource("5_5g8uy")]
+position = Vector2(0, -10)
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("RectangleShape2D_tdoai")
