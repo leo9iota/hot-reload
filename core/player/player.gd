@@ -42,7 +42,11 @@ func try_fire_bullet():
 	bullet.start(player_input_synchronizer_component.aim_vector)
 	get_parent().add_child(bullet, true)
 	fire_rate_timer.start()
+	play_muzzle_flash.rpc()
 
+
+@rpc("authority", "call_local", "unreliable")
+func play_muzzle_flash():
 	if recoil_animation.is_playing():
 		recoil_animation.stop()
 
