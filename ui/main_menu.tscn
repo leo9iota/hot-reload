@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://cv72gepsh2eqd"]
+[gd_scene load_steps=2 format=3 uid="uid://cv72gepsh2eqd"]
 
 [ext_resource type="Script" uid="uid://dsd8e3iodnvio" path="res://ui/main_menu.gd" id="1_t7e0r"]
-[ext_resource type="Texture2D" uid="uid://d0ib4jgqfotjf" path="res://assets/effect/background.png" id="2_0dkrt"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -11,14 +10,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_t7e0r")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture_repeat = 2
-position = Vector2(270, 215)
-rotation = -0.785397
-texture = ExtResource("2_0dkrt")
-region_enabled = true
-region_rect = Rect2(0, 0, 1200, 1200)
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
