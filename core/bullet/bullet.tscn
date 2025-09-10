@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://clscgesvupype"]
+[gd_scene load_steps=6 format=3 uid="uid://clscgesvupype"]
 
 [ext_resource type="Script" uid="uid://bmxt2ibo2gjed" path="res://core/bullet/bullet.gd" id="1_jssut"]
 [ext_resource type="Texture2D" uid="uid://uvktllimnuq1" path="res://assets/player/bullet.png" id="1_oxvli"]
+[ext_resource type="PackedScene" uid="uid://bx1dq7x4jqnr3" path="res://components/hitbox/hitbox_component.tscn" id="2_bynnv"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_jssut"]
 properties/0/path = NodePath(".:global_position")
@@ -14,7 +15,7 @@ properties/2/path = NodePath(".:direction")
 properties/2/spawn = true
 properties/2/replication_mode = 0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_jssut"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_x1o6m"]
 radius = 7.0
 
 [node name="Bullet" type="Node2D"]
@@ -28,12 +29,10 @@ wait_time = 2.0
 one_shot = true
 autostart = true
 
-[node name="Area2D" type="Area2D" parent="."]
-collision_layer = 256
-collision_mask = 0
+[node name="HitboxComponent" parent="." instance=ExtResource("2_bynnv")]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CircleShape2D_jssut")
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("CircleShape2D_x1o6m")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_oxvli")
