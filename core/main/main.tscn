@@ -1,14 +1,26 @@
-[gd_scene load_steps=6 format=3 uid="uid://cpcymwvh3h4ny"]
+[gd_scene load_steps=10 format=3 uid="uid://cpcymwvh3h4ny"]
 
 [ext_resource type="Script" uid="uid://dxt7wy02xkq4o" path="res://core/main/main.gd" id="1_ig7tw"]
-[ext_resource type="Texture2D" uid="uid://u3ti0f3pau7h" path="res://assets/environment/arena.png" id="2_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://bf7trdkyj6jdh" path="res://core/manager/enemy_manager.tscn" id="2_h2yge"]
+[ext_resource type="Texture2D" uid="uid://dvjlvmkfqp7hn" path="res://assets/environment/arena-v2.png" id="3_vwfi5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h2yge"]
-size = Vector2(32, 300)
+size = Vector2(32, 343)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1bvp3"]
-size = Vector2(500, 32)
+size = Vector2(626.75, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vwfi5"]
+size = Vector2(42, 52.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yibi5"]
+size = Vector2(34, 42)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k5wvu"]
+size = Vector2(33.5938, 41)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_81xgm"]
+size = Vector2(34, 42)
 
 [node name="Main" type="Node"]
 script = ExtResource("1_ig7tw")
@@ -26,57 +38,86 @@ position = Vector2(320, 185)
 metadata/_edit_lock_ = true
 
 [node name="Arena" type="Sprite2D" parent="."]
-position = Vector2(320, 185)
-texture = ExtResource("2_0xm2m")
-metadata/_edit_lock_ = true
+position = Vector2(320, 179)
+scale = Vector2(3, 2.55)
+texture = ExtResource("3_vwfi5")
 
 [node name="EnemySpawnArea" type="ReferenceRect" parent="."]
 custom_minimum_size = Vector2(414, 216)
-offset_left = 113.0
-offset_top = 73.0
-offset_right = 527.0
+offset_left = 34.0
+offset_top = 42.0
+offset_right = 605.0
 offset_bottom = 289.0
 mouse_filter = 2
 border_width = 3.0
-metadata/_edit_lock_ = true
 
-[node name="StaticBodies" type="Node2D" parent="."]
-visible = false
+[node name="Borders" type="Node2D" parent="."]
 
-[node name="StaticBody2DLeft" type="StaticBody2D" parent="StaticBodies"]
+[node name="LeftBorder" type="StaticBody2D" parent="Borders"]
 position = Vector2(81, 183)
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBodies/StaticBody2DLeft"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/LeftBorder"]
+position = Vector2(-80, -17)
 shape = SubResource("RectangleShape2D_h2yge")
-metadata/_edit_lock_ = true
 
-[node name="StaticBody2DRight" type="StaticBody2D" parent="StaticBodies"]
+[node name="RightBorder" type="StaticBody2D" parent="Borders"]
 position = Vector2(559, 187)
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBodies/StaticBody2DRight"]
-position = Vector2(0, -6)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/RightBorder"]
+position = Vector2(80, -4)
 shape = SubResource("RectangleShape2D_h2yge")
-metadata/_edit_lock_ = true
 
-[node name="StaticBody2DTop" type="StaticBody2D" parent="StaticBodies"]
+[node name="TopBorder" type="StaticBody2D" parent="Borders"]
 position = Vector2(142, 126)
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBodies/StaticBody2DTop"]
-position = Vector2(179, -85)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/TopBorder"]
+position = Vector2(177.25, -119)
 shape = SubResource("RectangleShape2D_1bvp3")
-metadata/_edit_lock_ = true
 
-[node name="StaticBody2DBottom" type="StaticBody2D" parent="StaticBodies"]
+[node name="BottomBorder" type="StaticBody2D" parent="Borders"]
 position = Vector2(142, 126)
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBodies/StaticBody2DBottom"]
-position = Vector2(177, 195)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/BottomBorder"]
+position = Vector2(176.5, 194)
 shape = SubResource("RectangleShape2D_1bvp3")
-metadata/_edit_lock_ = true
+
+[node name="Crates" type="Node2D" parent="."]
+
+[node name="Crate1" type="StaticBody2D" parent="Crates"]
+position = Vector2(81, 183)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Crates/Crate1"]
+position = Vector2(-22, -145.25)
+shape = SubResource("RectangleShape2D_vwfi5")
+
+[node name="Crate2" type="StaticBody2D" parent="Crates"]
+position = Vector2(559, 187)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Crates/Crate2"]
+position = Vector2(-5, -155)
+shape = SubResource("RectangleShape2D_yibi5")
+
+[node name="Crate3" type="StaticBody2D" parent="Crates"]
+position = Vector2(142, 126)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Crates/Crate3"]
+position = Vector2(-84.7969, 139.5)
+shape = SubResource("RectangleShape2D_k5wvu")
+
+[node name="Crate4" type="StaticBody2D" parent="Crates"]
+position = Vector2(1118, 374)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Crates/Crate4"]
+position = Vector2(-529, -322)
+shape = SubResource("RectangleShape2D_81xgm")
 
 [node name="YSortRoot" type="Node2D" parent="."]
 y_sort_enabled = true
