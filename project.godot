@@ -33,6 +33,10 @@ window/stretch/mode="viewport"
 
 enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg", "res://addons/SignalVisualizer/plugin.cfg", "res://addons/gdUnit4/plugin.cfg", "res://addons/godot_super-wakatime/plugin.cfg")
 
+[gui]
+
+theme/custom="uid://bfvecunsdnyrc"
+
 [input]
 
 move_left={
