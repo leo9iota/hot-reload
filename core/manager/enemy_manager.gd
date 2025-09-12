@@ -1,4 +1,4 @@
-extends Node
+class_name EnemeyManager extends Node
 
 const ROUND_BASE_TIME: int = 10
 const ROUND_GROWTH: int = 5
@@ -21,6 +21,9 @@ func _ready():
 	round_timer.timeout.connect(_on_round_timer_timeout)
 	GameEvents.enemy_died.connect(_on_enemy_died)
 	begin_round()
+
+func get_round_time_remaining() -> float:
+	return round_timer.time_left
 
 
 func begin_round():
