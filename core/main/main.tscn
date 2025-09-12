@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://cpcymwvh3h4ny"]
+[gd_scene load_steps=11 format=3 uid="uid://cpcymwvh3h4ny"]
 
 [ext_resource type="Script" uid="uid://dxt7wy02xkq4o" path="res://core/main/main.gd" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://bf7trdkyj6jdh" path="res://core/manager/enemy_manager.tscn" id="2_h2yge"]
 [ext_resource type="Texture2D" uid="uid://dvjlvmkfqp7hn" path="res://assets/environment/arena-v2.png" id="3_vwfi5"]
+[ext_resource type="PackedScene" uid="uid://hkjc5xmcbepg" path="res://core/ui/game_ui/game_ui.tscn" id="3_yibi5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h2yge"]
 size = Vector2(32, 343)
@@ -33,6 +34,9 @@ spawn_rect = NodePath("../EnemySpawnArea")
 _spawnable_scenes = PackedStringArray("uid://clscgesvupype", "uid://c3nm61v3vr63j")
 spawn_path = NodePath("../YSortRoot")
 
+[node name="GameUI" parent="." node_paths=PackedStringArray("enemy_manager") instance=ExtResource("3_yibi5")]
+enemy_manager = NodePath("../EnemyManager")
+
 [node name="PlayerSpawnPosition" type="Marker2D" parent="."]
 position = Vector2(320, 185)
 metadata/_edit_lock_ = true
@@ -52,6 +56,8 @@ mouse_filter = 2
 border_width = 3.0
 
 [node name="Borders" type="Node2D" parent="."]
+visible = false
+metadata/_edit_lock_ = true
 
 [node name="LeftBorder" type="StaticBody2D" parent="Borders"]
 position = Vector2(81, 183)
@@ -86,6 +92,8 @@ position = Vector2(176.5, 194)
 shape = SubResource("RectangleShape2D_1bvp3")
 
 [node name="Crates" type="Node2D" parent="."]
+visible = false
+metadata/_edit_lock_ = true
 
 [node name="Crate1" type="StaticBody2D" parent="Crates"]
 position = Vector2(81, 183)
@@ -122,5 +130,3 @@ shape = SubResource("RectangleShape2D_81xgm")
 [node name="YSortRoot" type="Node2D" parent="."]
 y_sort_enabled = true
 metadata/_edit_lock_ = true
-
-[node name="GameUI" type="CanvasLayer" parent="."]
