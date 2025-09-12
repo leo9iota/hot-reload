@@ -53,7 +53,7 @@ func play_fire_effect():
 		recoil_animation.stop()
 
 	recoil_animation.play("fire")
-	
+
 	var muzzle_flash: Node2D = muzzle_flash_scene.instantiate()
 	muzzle_flash.global_position = barrel_position.global_position
 	muzzle_flash.rotation = barrel_position.global_rotation
