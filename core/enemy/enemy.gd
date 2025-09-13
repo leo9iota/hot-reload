@@ -17,6 +17,12 @@ var default_collision_mask: int
 var default_collision_layer: int
 var alert_tween: Tween
 
+var current_state: String:
+	get:
+		return state_machine.current_state
+	set(value):
+		state_machine.change_state(Callable.create(self, value))
+
 
 func _ready() -> void:
 	state_machine.add_state(state_spawn, enter_state_spawn, Callable())
