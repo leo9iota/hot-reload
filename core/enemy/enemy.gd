@@ -5,40 +5,30 @@ extends CharacterBody2D
 @onready var visuals: Node2D = $Visuals
 
 var target_position: Vector2
-var is_spawning: bool
+var state_machine: CallableStateMachine = CallableStateMachine.new()
 
 
 func _ready() -> void:
+	state_machine.add_state(state_spawn, enter_state_spawn, Callable())
+	state_machine.add_state(state_normal, enter_state_normal, Callable())
+	state_machine.set_initial_state(state_spawn)
+
 	target_acquisition_timer.timeout.connect(
 		_on_target_acquisition_timer_timeout
 	)
 
-	play_spawn_animation()
-
 	if is_multiplayer_authority():
 		health_component.died.connect(_on_died)
-		acquire_target()
 
 
 func _process(_delta: float) -> void:
-	# Only set velocity and move enemy if we're on the server-side
-	if is_multiplayer_authority() && not is_spawning:
-		velocity = global_position.direction_to(target_position) * 50
+	state_machine.update()
+
+	if is_multiplayer_authority():
 		move_and_slide()
 
-	if not is_spawning:
-		flip_enemy_character()
 
-
-# Flips the enemy character asset into specific direction
-func flip_enemy_character():
-	visuals.scale = (
-		Vector2.ONE if target_position.x > global_position.x else Vector2(-1, 1)
-	)
-
-
-func play_spawn_animation():
-	is_spawning = true
+func enter_state_spawn():
 	var tween := create_tween()
 	(
 		tween
@@ -47,8 +37,30 @@ func play_spawn_animation():
 		. set_ease(Tween.EASE_OUT)
 		. set_trans(Tween.TRANS_BACK)
 	)
-	await tween.finished
-	is_spawning = false
+	tween.finished.connect(func(): state_machine.change_state(state_normal))
+
+
+func state_spawn():
+	pass
+
+
+func enter_state_normal():
+	if is_multiplayer_authority():
+		acquire_target()
+
+
+func state_normal():
+	if is_multiplayer_authority():
+		velocity = global_position.direction_to(target_position) * 50
+
+	flip_enemy_character()
+
+
+# Flips the enemy character asset into specific direction
+func flip_enemy_character():
+	visuals.scale = (
+		Vector2.ONE if target_position.x > global_position.x else Vector2(-1, 1)
+	)
 
 
 func acquire_target():
