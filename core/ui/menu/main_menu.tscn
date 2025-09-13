@@ -27,8 +27,8 @@ grow_vertical = 2
 
 [node name="HostButton" type="Button" parent="HBoxContainer"]
 layout_mode = 2
-text = "Host"
+text = "Player 1"
 
 [node name="JoinButton" type="Button" parent="HBoxContainer"]
 layout_mode = 2
-text = "Join"
+text = "Player 2"
