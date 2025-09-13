@@ -17,16 +17,26 @@ func add_state(
 ):
 	# Validate input
 	if normal_state_callable.is_null():
-		push_warning("add_state: normal_state_callable is null; state not added.")
+		push_warning(
+			"add_state: normal_state_callable is null; state not added."
+		)
 		return
 
 	var state_name: StringName = normal_state_callable.get_method()
 	if String(state_name).is_empty():
-		push_warning("add_state: normal_state_callable has empty method name; state not added.")
+		push_warning(
+			"add_state: normal_state_callable has empty method name; state not added."
+		)
 		return
 
 	if state_dictionary.has(state_name):
-		push_warning("add_state: Duplicate state '" + String(state_name) + "' will be overwritten.")
+		push_warning(
+			(
+				"add_state: Duplicate state '"
+				+ String(state_name)
+				+ "' will be overwritten."
+			)
+		)
 
 	state_dictionary[state_name] = {
 		normal = normal_state_callable,
