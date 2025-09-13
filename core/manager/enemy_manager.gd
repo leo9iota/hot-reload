@@ -49,7 +49,7 @@ func sync_server(to_peer_id: int = -1):
 
 	if to_peer_id > -1 and to_peer_id != 1:
 		_sync_client.rpc_id(to_peer_id, data)
-	else: 
+	else:
 		# 2. Send data to client via RPC
 		_sync_client.rpc(data)
 

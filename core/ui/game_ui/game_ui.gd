@@ -10,7 +10,9 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	round_timer_label.text = str(ceili(enemy_manager.get_round_time_remaining()))
+	round_timer_label.text = str(
+		ceili(enemy_manager.get_round_time_remaining())
+	)
 
 
 func _on_round_began(round_count: int):
