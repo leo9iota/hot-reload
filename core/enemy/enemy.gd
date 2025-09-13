@@ -24,19 +24,21 @@ var current_state: String:
 		state_machine.change_state(Callable.create(self, value))
 
 
-func _ready() -> void:
-	state_machine.add_state(state_spawn, enter_state_spawn, Callable())
-	state_machine.add_state(state_normal, enter_state_normal, Callable())
-	state_machine.add_state(
-		state_attack, enter_state_attack, leave_state_attack
-	)
-	state_machine.add_state(
-		state_charge_attack,
-		enter_state_charge_attack,
-		leave_state_charge_attack
-	)
-	state_machine.set_initial_state(state_spawn)
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_SCENE_INSTANTIATED:
+		state_machine.add_state(state_spawn, enter_state_spawn, Callable())
+		state_machine.add_state(state_normal, enter_state_normal, Callable())
+		state_machine.add_state(
+			state_attack, enter_state_attack, leave_state_attack
+		)
+		state_machine.add_state(
+			state_charge_attack,
+			enter_state_charge_attack,
+			leave_state_charge_attack
+		)
 
+
+func _ready() -> void:
 	default_collision_mask = collision_mask
 	default_collision_layer = collision_layer
 	hitbox_collision_shape.disabled = true
@@ -44,6 +46,7 @@ func _ready() -> void:
 
 	if is_multiplayer_authority():
 		health_component.died.connect(_on_died)
+		state_machine.set_initial_state(state_spawn)
 
 
 func _process(_delta: float) -> void:
@@ -89,7 +92,7 @@ func state_normal():
 		):
 			state_machine.change_state(state_charge_attack)
 
-	flip_enemy_character()
+	flip_sprite()
 
 
 func enter_state_charge_attack():
@@ -117,6 +120,8 @@ func state_charge_attack():
 
 		if charge_attack_timer.is_stopped():
 			state_machine.change_state(state_attack)
+
+	flip_sprite()
 
 
 func leave_state_charge_attack():
@@ -160,7 +165,7 @@ func leave_state_attack():
 
 
 # Flips the enemy character asset into specific direction
-func flip_enemy_character():
+func flip_sprite():
 	visuals.scale = (
 		Vector2.ONE
 		if (target_position.x > global_position.x)
