@@ -1,6 +1,6 @@
 class_name EnemeyManager extends Node
 
-signal round_began(round_number: int)
+signal round_changed(round_number: int)
 
 const ROUND_BASE_TIME: int = 10
 const ROUND_GROWTH: int = 5
@@ -14,7 +14,16 @@ const ENEMY_SPAWN_TIME_GROWTH: float = -0.15
 @onready var spawn_interval_timer: Timer = $SpawnIntervalTimer
 @onready var round_timer: Timer = $RoundTimer
 
-var round_count: int = 0
+# Internal round count variable
+var _round_count: int = 0
+# Round count variable with getter and setter
+var round_count: int = 0:
+	get:
+		return _round_count
+	set(value):
+		_round_count = value
+		round_changed.emit(_round_count)
+
 var spawned_enemies: int = 0
 
 
@@ -22,7 +31,37 @@ func _ready():
 	spawn_interval_timer.timeout.connect(_on_spawn_interval_timer_timeout)
 	round_timer.timeout.connect(_on_round_timer_timeout)
 	GameEvents.enemy_died.connect(_on_enemy_died)
-	begin_round()
+
+	if is_multiplayer_authority():
+		begin_round()
+
+
+func sync_server(to_peer_id: int = -1):
+	if not is_multiplayer_authority():
+		return
+
+	# 1. Collect data on the server
+	var data = {
+		"round_timer_is_running": not round_timer.is_stopped(),
+		"round_timer_time_left": round_timer.time_left,
+		"round_count": round_count
+	}
+
+	if to_peer_id > -1 and to_peer_id != 1:
+		_sync_client.rpc_id(to_peer_id, data)
+	else: 
+		# 2. Send data to client via RPC
+		_sync_client.rpc(data)
+
+
+@rpc("authority", "call_remote", "reliable")
+func _sync_client(data: Dictionary):
+	round_timer.wait_time = data["round_timer_time_left"]
+
+	if data["round_timer_is_running"]:
+		round_timer.start()
+
+	round_count = data["round_count"]
 
 
 func get_round_time_remaining() -> float:
@@ -37,7 +76,7 @@ func begin_round():
 	spawn_interval_timer.wait_time = BASE_ENEMY_SPAWN_TIME + ((round_count - 1) * ENEMY_SPAWN_TIME_GROWTH)
 	spawn_interval_timer.start()
 
-	round_began.emit(round_count)
+	sync_server()
 
 
 func check_round_completed():
