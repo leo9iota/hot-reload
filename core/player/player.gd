@@ -1,4 +1,5 @@
 class_name Player extends CharacterBody2D
+signal died
 
 @onready
 var player_input_synchronizer_component: PlayerInputSynchronizerComponent = $PlayerInputSynchronizerComponent
@@ -18,7 +19,9 @@ func _ready():
 	player_input_synchronizer_component.set_multiplayer_authority(
 		input_multiplayer_authority
 	)
-	health_component.died.connect(_on_died)
+
+	if is_multiplayer_authority():
+		health_component.died.connect(_on_died)
 
 
 func _process(_delta: float) -> void:
@@ -64,4 +67,5 @@ func play_fire_effect():
 
 
 func _on_died():
-	print("Player died")
+	died.emit()
+	queue_free()
