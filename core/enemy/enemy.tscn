@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://c3nm61v3vr63j"]
+[gd_scene load_steps=11 format=3 uid="uid://c3nm61v3vr63j"]
 
 [ext_resource type="Texture2D" uid="uid://ca0wvkeeaehjo" path="res://assets/enemy/enemy_medium.png" id="1_5yaqm"]
 [ext_resource type="Script" uid="uid://cspxds6vsxy0o" path="res://core/enemy/enemy.gd" id="1_6eu31"]
 [ext_resource type="PackedScene" uid="uid://cpvn3uop4kkty" path="res://components/hurtbox/hurtbox_component.tscn" id="3_2nsib"]
 [ext_resource type="PackedScene" uid="uid://u8l6rwxgkf8d" path="res://components/health/health_component.tscn" id="3_5mk0m"]
+[ext_resource type="Texture2D" uid="uid://ujwh5tgotaed" path="res://assets/enemy/attack_alert.png" id="4_tdoai"]
 [ext_resource type="PackedScene" uid="uid://bx1dq7x4jqnr3" path="res://components/hitbox/hitbox_component.tscn" id="5_5g8uy"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_6eu31"]
@@ -53,6 +54,10 @@ health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="HurtboxComponent"]
 shape = SubResource("RectangleShape2D_5g8uy")
+
+[node name="AlertSprite" type="Sprite2D" parent="."]
+position = Vector2(0, -30)
+texture = ExtResource("4_tdoai")
 
 [node name="Visuals" type="Node2D" parent="."]
 
