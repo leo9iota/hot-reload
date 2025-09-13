@@ -48,9 +48,9 @@ texture = ExtResource("3_vwfi5")
 
 [node name="EnemySpawnArea" type="ReferenceRect" parent="."]
 custom_minimum_size = Vector2(414, 216)
-offset_left = 34.0
+offset_left = 106.0
 offset_top = 42.0
-offset_right = 605.0
+offset_right = 520.0
 offset_bottom = 289.0
 mouse_filter = 2
 border_width = 3.0
