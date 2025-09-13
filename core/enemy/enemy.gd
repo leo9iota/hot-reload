@@ -25,7 +25,7 @@ func _process(_delta: float) -> void:
 	if is_multiplayer_authority() && not is_spawning:
 		velocity = global_position.direction_to(target_position) * 50
 		move_and_slide()
-		
+
 	if not is_spawning:
 		flip_enemy_character()
 
