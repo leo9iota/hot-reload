@@ -56,22 +56,15 @@ func sync_server(to_peer_id: int = -1):
 
 @rpc("authority", "call_remote", "reliable")
 func _sync_client(data: Dictionary):
-	# Ensure we never assign a non-positive time to the timer (Godot requires > 0)
-	var time_left: float = float(data.get("round_timer_time_left", 0.0))
-	var is_running: bool = bool(data.get("round_timer_is_running", false))
-
-	# Clamp to a small epsilon to avoid "Time should be greater than zero" errors
-	var safe_time: float = max(time_left, 0.001)
-
-	if is_running:
-		# Start the timer with the remaining time directly
-		round_timer.start(safe_time)
-	else:
-		# If the server says it's not running, stop locally and set a safe wait time
-		round_timer.stop()
-		round_timer.wait_time = safe_time
-
-	round_count = int(data.get("round_count", round_count))
+	var wait_time: float = data["round_timer_time_left"]
+	
+	if wait_time > 0:
+		round_timer.wait_time = wait_time
+		
+	if data["round_timer_is_running"]:
+		round_timer.start()
+		
+	round_count = data["round_count"]
 
 
 func get_round_time_remaining() -> float:
