@@ -6,10 +6,7 @@ extends CanvasLayer
 
 
 func _ready() -> void:
-	if enemy_manager:
-		enemy_manager.round_changed.connect(_on_round_began)
-	else:
-		push_warning("EnemyManager not assigned on GameUI; assign it in the inspector.")
+	enemy_manager.round_changed.connect(_on_round_began)
 
 
 func _process(_delta: float) -> void:
