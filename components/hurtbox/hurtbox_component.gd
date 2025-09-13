@@ -8,7 +8,7 @@ func _ready() -> void:
 
 
 func _on_area_entered(other_area: Area2D):
-	if not is_multiplayer_authority() or (other_area is not HitboxComponent):
+	if not is_multiplayer_authority() or other_area is not HitboxComponent:
 		return
 
 	var hitbox_component: HitboxComponent = other_area
