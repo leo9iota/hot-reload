@@ -9,20 +9,20 @@ install:
 # Format all GDScript files using gdformat (excluding addons)
 fmt:
     #!/usr/bin/env bash
-    find . -name "*.gd" -not -path "./addons/*" | xargs -r uv run gdformat --line-length 120
+    find . -name "*.gd" -not -path "./addons/*" | xargs -r uv run gdformat --line-length 80
 
 # Format specific file or directory
 fmt-path path:
-    uv run gdformat --line-length 120 "{{ path }}"
+    uv run gdformat --line-length 80 "{{ path }}"
 
 # Check formatting without making changes (dry run)
 fmt-check:
     #!/usr/bin/env bash
-    find . -name "*.gd" -not -path "./addons/*" | xargs -r uv run gdformat --line-length 120 --check
+    find . -name "*.gd" -not -path "./addons/*" | xargs -r uv run gdformat --line-length 80 --check
 
 # Check formatting for specific path
 fmt-check-path path:
-    uv run gdformat --line-length 120 --check "{{ path }}"
+    uv run gdformat --line-length 80 --check "{{ path }}"
 
 # Format with specific line length (default is 80)
 fmt-line-length length="80":
@@ -116,7 +116,7 @@ help-gdlint:
 help-gdparse:
     uv run gdparse --help
 
-# Count GDScript files in the project
-count-gd-files:
+# GDScript file count
+fc:
     @find . -name "*.gd" -not -path "./addons/*" | wc -l | sed 's/^/GDScript files (excluding addons): /'
-    @find . -name "*.gd" | wc -l | sed 's/^/Total GDScript files: /'
+    @find . -name "*.gd" | wc -l | sed 's/^/Total GDScript file count: /'
