@@ -1,4 +1,4 @@
-class_name EnemeyManager extends Node
+class_name EnemyManager extends Node
 
 signal round_changed(round_number: int)
 
@@ -56,12 +56,22 @@ func sync_server(to_peer_id: int = -1):
 
 @rpc("authority", "call_remote", "reliable")
 func _sync_client(data: Dictionary):
-	round_timer.wait_time = data["round_timer_time_left"]
+	# Ensure we never assign a non-positive time to the timer (Godot requires > 0)
+	var time_left: float = float(data.get("round_timer_time_left", 0.0))
+	var is_running: bool = bool(data.get("round_timer_is_running", false))
 
-	if data["round_timer_is_running"]:
-		round_timer.start()
+	# Clamp to a small epsilon to avoid "Time should be greater than zero" errors
+	var safe_time: float = max(time_left, 0.001)
 
-	round_count = data["round_count"]
+	if is_running:
+		# Start the timer with the remaining time directly
+		round_timer.start(safe_time)
+	else:
+		# If the server says it's not running, stop locally and set a safe wait time
+		round_timer.stop()
+		round_timer.wait_time = safe_time
+
+	round_count = int(data.get("round_count", round_count))
 
 
 func get_round_time_remaining() -> float:
@@ -73,7 +83,11 @@ func begin_round():
 	round_timer.wait_time = ROUND_BASE_TIME + ((round_count - 1) * ROUND_GROWTH)
 	round_timer.start()
 
-	spawn_interval_timer.wait_time = BASE_ENEMY_SPAWN_TIME + ((round_count - 1) * ENEMY_SPAWN_TIME_GROWTH)
+	# Prevent negative or zero spawn interval as rounds progress
+	spawn_interval_timer.wait_time = max(
+		BASE_ENEMY_SPAWN_TIME + ((round_count - 1) * ENEMY_SPAWN_TIME_GROWTH),
+		0.05
+	)
 	spawn_interval_timer.start()
 
 	sync_server()
