@@ -1,12 +1,15 @@
 extends CanvasLayer
 
-@export var enemy_manager: EnemeyManager
+@export var enemy_manager: EnemyManager
 @onready var round_timer_label: Label = %RoundTimerLabel
 @onready var round_count_label: Label = %RoundCountLabel
 
 
 func _ready() -> void:
-	enemy_manager.round_changed.connect(_on_round_began)
+	if enemy_manager:
+		enemy_manager.round_changed.connect(_on_round_began)
+	else:
+		push_warning("EnemyManager not assigned on GameUI; assign it in the inspector.")
 
 
 func _process(_delta: float) -> void:
