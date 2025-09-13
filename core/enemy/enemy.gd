@@ -11,6 +11,11 @@ var state_machine: CallableStateMachine = CallableStateMachine.new()
 func _ready() -> void:
 	state_machine.add_state(state_spawn, enter_state_spawn, Callable())
 	state_machine.add_state(state_normal, enter_state_normal, Callable())
+	state_machine.add_state(
+		state_charge_attack, enter_state_charge_attack, Callable()
+	)
+	state_machine.add_state(state_attack, enter_state_attack, Callable())
+
 	state_machine.set_initial_state(state_spawn)
 
 	target_acquisition_timer.timeout.connect(
@@ -51,15 +56,33 @@ func enter_state_normal():
 
 func state_normal():
 	if is_multiplayer_authority():
-		velocity = global_position.direction_to(target_position) * 50
+		velocity = ((global_position.direction_to(target_position)) * 50)
 
 	flip_enemy_character()
+
+
+func enter_state_charge_attack():
+	pass
+
+
+func state_charge_attack():
+	pass
+
+
+func enter_state_attack():
+	pass
+
+
+func state_attack():
+	pass
 
 
 # Flips the enemy character asset into specific direction
 func flip_enemy_character():
 	visuals.scale = (
-		Vector2.ONE if target_position.x > global_position.x else Vector2(-1, 1)
+		Vector2.ONE
+		if (target_position.x > global_position.x)
+		else Vector2(-1, 1)
 	)
 
 
@@ -89,7 +112,7 @@ func acquire_target():
 			nearest_player = player
 
 	if nearest_player != null:
-		target_position = nearest_player.global_position
+		target_position = (nearest_player.global_position)
 
 
 func _on_target_acquisition_timer_timeout():

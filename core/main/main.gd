@@ -11,8 +11,8 @@ func _ready():
 	multiplayer_spawner.spawn_function = func(data):
 		var player = player_scene.instantiate() as Player
 		player.name = str(data.peer_id)
-		player.input_multiplayer_authority = data.peer_id
-		player.global_position = player_spawn_position.global_position
+		player.input_multiplayer_authority = (data.peer_id)
+		player.global_position = (player_spawn_position.global_position)
 
 		return player
 

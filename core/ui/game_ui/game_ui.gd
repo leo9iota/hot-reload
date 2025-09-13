@@ -16,4 +16,4 @@ func _process(_delta: float) -> void:
 
 
 func _on_round_began(round_count: int):
-	round_count_label.text = "Round %s" % round_count
+	round_count_label.text = ("Round %s" % round_count)

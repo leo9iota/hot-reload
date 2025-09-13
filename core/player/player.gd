@@ -24,7 +24,7 @@ func _ready():
 func _process(_delta: float) -> void:
 	update_aim_position()
 	if is_multiplayer_authority():
-		velocity = player_input_synchronizer_component.movement_vector * 100
+		velocity = ((player_input_synchronizer_component.movement_vector) * 100)
 		move_and_slide()
 		if player_input_synchronizer_component.is_attack_pressed:
 			try_fire_bullet()
@@ -34,7 +34,7 @@ func update_aim_position():
 	var aim_vector = player_input_synchronizer_component.aim_vector
 	var aim_position = weapon_root.global_position + aim_vector
 	# Flip player in direction of gun
-	visuals.scale = Vector2.ONE if aim_vector.x >= 0 else Vector2(-1, 1)
+	visuals.scale = (Vector2.ONE if aim_vector.x >= 0 else Vector2(-1, 1))
 	weapon_root.look_at(aim_position)
 
 
@@ -43,7 +43,7 @@ func try_fire_bullet():
 		return
 
 	var bullet = bullet_scene.instantiate() as Bullet
-	bullet.global_position = barrel_position.global_position
+	bullet.global_position = (barrel_position.global_position)
 	bullet.start(player_input_synchronizer_component.aim_vector)
 	get_parent().add_child(bullet, true)
 	fire_rate_timer.start()
@@ -58,8 +58,8 @@ func play_fire_effect():
 	recoil_animation.play("fire")
 
 	var muzzle_flash: Node2D = muzzle_flash_scene.instantiate()
-	muzzle_flash.global_position = barrel_position.global_position
-	muzzle_flash.rotation = barrel_position.global_rotation
+	muzzle_flash.global_position = (barrel_position.global_position)
+	muzzle_flash.rotation = (barrel_position.global_rotation)
 	get_parent().add_child(muzzle_flash)
 
 
