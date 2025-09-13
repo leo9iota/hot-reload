@@ -4,7 +4,7 @@ var player_scene: PackedScene = preload("uid://bq3ewxhqr2hif")
 
 @onready var multiplayer_spawner: MultiplayerSpawner = $MultiplayerSpawner
 @onready var player_spawn_position: Marker2D = $PlayerSpawnPosition
-@onready var enemy_manager: EnemeyManager = $EnemyManager
+@onready var enemy_manager: EnemyManager = $EnemyManager
 
 
 func _ready():
