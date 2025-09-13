@@ -3,24 +3,31 @@ extends CharacterBody2D
 @onready var target_acquisition_timer: Timer = $TargetAcquisitionTimer
 @onready var health_component: HealthComponent = $HealthComponent
 @onready var visuals: Node2D = $Visuals
+@onready var attack_cooldown_timer: Timer = $AttackCooldownTimer
+@onready var charge_attack_timer: Timer = $ChargeAttackTimer
+@onready var hitbox_collision_shape: CollisionShape2D = %HitboxCollisionShape
+
+const DASH_SPEED: int = 400
+const LERP_SMOOTHING: int = -15
 
 var target_position: Vector2
 var state_machine: CallableStateMachine = CallableStateMachine.new()
+var default_collision_mask: int
+var default_collision_layer: int
 
 
 func _ready() -> void:
 	state_machine.add_state(state_spawn, enter_state_spawn, Callable())
 	state_machine.add_state(state_normal, enter_state_normal, Callable())
 	state_machine.add_state(
-		state_charge_attack, enter_state_charge_attack, Callable()
+		state_charge_attack, enter_state_charge_attack, leave_state_attack 
 	)
 	state_machine.add_state(state_attack, enter_state_attack, Callable())
-
 	state_machine.set_initial_state(state_spawn)
 
-	target_acquisition_timer.timeout.connect(
-		_on_target_acquisition_timer_timeout
-	)
+	default_collision_mask = collision_mask
+	default_collision_layer = collision_layer
+	hitbox_collision_shape.disabled = true
 
 	if is_multiplayer_authority():
 		health_component.died.connect(_on_died)
@@ -52,30 +59,66 @@ func state_spawn():
 func enter_state_normal():
 	if is_multiplayer_authority():
 		acquire_target()
+		target_acquisition_timer.start()
 
 
 func state_normal():
 	if is_multiplayer_authority():
 		velocity = ((global_position.direction_to(target_position)) * 50)
+		
+		if target_acquisition_timer.is_stopped():
+			acquire_target()
+			target_acquisition_timer.start()
+		
+		if (
+			attack_cooldown_timer.is_stopped()
+			&& global_position.distance_to(target_position) < 150
+		):
+			state_machine.change_state(state_charge_attack)
 
 	flip_enemy_character()
 
 
 func enter_state_charge_attack():
-	pass
+	acquire_target()
+	charge_attack_timer.start()
 
 
 func state_charge_attack():
-	pass
+	if is_multiplayer_authority():
+		velocity = velocity.lerp(
+			Vector2.ZERO, 1.0 - exp(LERP_SMOOTHING * get_process_delta_time())
+		)
+
+		if charge_attack_timer.is_stopped():
+			state_machine.change_state(state_attack)
 
 
 func enter_state_attack():
-	pass
+	if is_multiplayer_authority():
+		# This actually shifts by 0 (doesn't do anything), its only for semantic purposes
+		collision_mask = 1 << 0
+		collision_layer = 0
+		hitbox_collision_shape.disabled = false
+		velocity = global_position.direction_to(target_position) * DASH_SPEED
 
 
 func state_attack():
-	pass
+	if is_multiplayer_authority():
+		velocity = velocity.lerp(
+			Vector2.ZERO, 1.0 - exp(-3 * get_process_delta_time())
+		)
+		
+		if velocity.length() < 25:
+			state_machine.change_state(state_normal)
 
+
+func leave_state_attack():
+	if is_multiplayer_authority():
+		collision_mask = default_collision_mask
+		collision_layer = default_collision_layer
+		hitbox_collision_shape.disabled = true
+		attack_cooldown_timer.start()
 
 # Flips the enemy character asset into specific direction
 func flip_enemy_character():
@@ -113,11 +156,6 @@ func acquire_target():
 
 	if nearest_player != null:
 		target_position = (nearest_player.global_position)
-
-
-func _on_target_acquisition_timer_timeout():
-	if is_multiplayer_authority():
-		acquire_target()
 
 
 func _on_died():
