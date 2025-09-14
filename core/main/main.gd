@@ -9,6 +9,7 @@ var player_scene: PackedScene = preload("uid://bq3ewxhqr2hif")
 @onready var enemy_manager: EnemyManager = $EnemyManager
 
 var dead_peers: Array[int] = []
+var player_dictionary: Dictionary[int, Player] = {}
 
 
 func _ready():
@@ -21,11 +22,15 @@ func _ready():
 		if is_multiplayer_authority():
 			player.died.connect(_on_player_died.bind(data.peer_id))
 
+		player_dictionary[data.peer_id] = player
 		return player
 
 	peer_ready.rpc_id(1)
 	enemy_manager.round_completed.connect(_on_round_completed)
 	multiplayer.server_disconnected.connect(_on_server_disconnected)
+
+	if is_multiplayer_authority():
+		multiplayer.peer_disconnected.connect(_on_peer_disconnected)
 
 
 @rpc("any_peer", "call_local", "reliable")
@@ -36,7 +41,12 @@ func peer_ready():
 
 
 func respawn_dead_peers():
+	var all_peers := get_all_peers()
+
 	for peer_id in dead_peers:
+		if not all_peers.has(peer_id):
+			continue
+
 		multiplayer_spawner.spawn({"peer_id": peer_id})
 
 	dead_peers.clear()
@@ -50,10 +60,8 @@ func end_game():
 
 func check_game_over():
 	var is_game_over := true
-	var all_peers := multiplayer.get_peers()
-	all_peers.push_back(multiplayer.get_unique_id())
 
-	for peer_id in all_peers:
+	for peer_id in get_all_peers():
 		if not dead_peers.has(peer_id):
 			is_game_over = false
 			break
@@ -61,6 +69,12 @@ func check_game_over():
 	if is_game_over:
 		# Terminate the server and peers
 		end_game()
+
+
+func get_all_peers() -> PackedInt32Array:
+	var all_peers := multiplayer.get_peers()
+	all_peers.push_back(multiplayer.get_unique_id())
+	return all_peers
 
 
 func _on_player_died(peer_id: int):
@@ -74,3 +88,13 @@ func _on_round_completed():
 
 func _on_server_disconnected():
 	end_game()
+
+
+func _on_peer_disconnected(peer_id: int):
+	if player_dictionary.has(peer_id):
+		var player := player_dictionary[peer_id]
+
+		if is_instance_valid(player):
+			player.client_kill_player()
+
+		player_dictionary.erase(peer_id)
