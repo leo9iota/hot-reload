@@ -10,6 +10,7 @@ extends CharacterBody2D
 @onready var hurtbox_component: HurtboxComponent = $HurtboxComponent
 
 var impact_particles_scene: PackedScene = preload("uid://bsrtogn8safuu")
+var ground_particles_scene: PackedScene = preload("uid://b6na4lsxc16dn")
 
 const DASH_SPEED: int = 400
 const LERP_SMOOTHING: int = -15
@@ -213,7 +214,21 @@ func spawn_hit_particles():
 	get_parent().add_child(hit_particles)
 
 
+@rpc("authority", "call_local")
+func spawn_death_particles():
+	var death_particles: Node2D = ground_particles_scene.instantiate()
+	
+	var background_node: Node = Main.background_mask
+	
+	if not is_instance_valid(background_node):
+		background_node = get_parent()
+		
+	background_node.add_child(death_particles)
+	# Set to feet position
+	death_particles.global_position = global_position
+
 func _on_died():
+	spawn_death_particles.rpc()
 	GameEvents.emit_enemy_died()
 	queue_free()
 
