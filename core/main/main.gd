@@ -20,7 +20,7 @@ var player_dictionary: Dictionary[int, Player] = {}
 func _ready():
 	background_effects = _background_effects
 	background_mask = _background_mask
-	
+
 	multiplayer_spawner.spawn_function = func(data):
 		var player = player_scene.instantiate() as Player
 		player.name = str(data.peer_id)

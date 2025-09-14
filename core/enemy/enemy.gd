@@ -217,15 +217,16 @@ func spawn_hit_particles():
 @rpc("authority", "call_local")
 func spawn_death_particles():
 	var death_particles: Node2D = ground_particles_scene.instantiate()
-	
+
 	var background_node: Node = Main.background_mask
-	
+
 	if not is_instance_valid(background_node):
 		background_node = get_parent()
-		
+
 	background_node.add_child(death_particles)
 	# Set to feet position
 	death_particles.global_position = global_position
+
 
 func _on_died():
 	spawn_death_particles.rpc()
