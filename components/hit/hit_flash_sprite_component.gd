@@ -25,5 +25,6 @@ func _play_hit_flash():
 		. set_ease(Tween.EASE_IN)
 	)
 
+
 func _on_damaged():
 	_play_hit_flash.rpc()
