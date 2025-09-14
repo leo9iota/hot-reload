@@ -32,7 +32,7 @@ func _process(_delta: float) -> void:
 		if is_dying:
 			global_position = Vector2.RIGHT * 42069
 			return
-		 
+
 		velocity = ((player_input_synchronizer_component.movement_vector) * 100)
 		move_and_slide()
 		if player_input_synchronizer_component.is_attack_pressed:
@@ -59,6 +59,20 @@ func try_fire_bullet():
 	play_fire_effect.rpc()
 
 
+# Server-side only function
+func server_kill_player():
+	if not is_multiplayer_authority():
+		push_error("Cannot call kill function on non-server client")
+		return
+
+	# Sync with all clients
+	client_kill_player.rpc()
+	await get_tree().create_timer(0.5).timeout
+
+	died.emit()
+	queue_free()
+
+
 @rpc("authority", "call_local", "unreliable")
 func play_fire_effect():
 	if recoil_animation.is_playing():
@@ -71,14 +85,12 @@ func play_fire_effect():
 	muzzle_flash.rotation = (barrel_position.global_rotation)
 	get_parent().add_child(muzzle_flash)
 
+
 @rpc("authority", "call_local", "reliable")
-func kill():
+func client_kill_player():
 	is_dying = true
 	player_input_synchronizer_component.public_visibility = false
 
+
 func _on_died():
-	kill.rpc()
-	await get_tree().create_timer(0.5).timeout
-	
-	died.emit()
-	queue_free()
+	server_kill_player()
