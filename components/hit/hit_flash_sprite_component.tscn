@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://dem6mebnk4on4" path="res://components/hit/hit_flash_sprite_component.gd" id="3_j1l2d"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8loki"]
+resource_local_to_scene = true
 shader = ExtResource("1_xkmso")
 shader_parameter/percent = 0.0
 
