@@ -13,6 +13,7 @@ var player_input_synchronizer_component: PlayerInputSynchronizerComponent = $Pla
 var bullet_scene: PackedScene = preload("uid://clscgesvupype")
 var muzzle_flash_scene: PackedScene = preload("uid://drj72jf88qsqe")
 var input_multiplayer_authority: int
+var is_dying: bool
 
 
 func _ready():
@@ -27,6 +28,11 @@ func _ready():
 func _process(_delta: float) -> void:
 	update_aim_position()
 	if is_multiplayer_authority():
+		# Fix for error that occurs when player dies during movement
+		if is_dying:
+			global_position = Vector2.RIGHT * 42069
+			return
+		 
 		velocity = ((player_input_synchronizer_component.movement_vector) * 100)
 		move_and_slide()
 		if player_input_synchronizer_component.is_attack_pressed:
@@ -65,7 +71,14 @@ func play_fire_effect():
 	muzzle_flash.rotation = (barrel_position.global_rotation)
 	get_parent().add_child(muzzle_flash)
 
+@rpc("authority", "call_local", "reliable")
+func kill():
+	is_dying = true
+	player_input_synchronizer_component.public_visibility = false
 
 func _on_died():
+	kill.rpc()
+	await get_tree().create_timer(0.5).timeout
+	
 	died.emit()
 	queue_free()
