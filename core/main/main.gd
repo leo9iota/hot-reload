@@ -1,5 +1,7 @@
 extends Node
 
+const MAIN_MENU_SCENE_PATH := "res://core/ui/menu/main_menu.tscn"
+
 var player_scene: PackedScene = preload("uid://bq3ewxhqr2hif")
 
 @onready var multiplayer_spawner: MultiplayerSpawner = $MultiplayerSpawner
@@ -23,6 +25,7 @@ func _ready():
 
 	peer_ready.rpc_id(1)
 	enemy_manager.round_completed.connect(_on_round_completed)
+	multiplayer.server_disconnected.connect(_on_server_disconnected)
 
 
 @rpc("any_peer", "call_local", "reliable")
@@ -39,9 +42,35 @@ func respawn_dead_peers():
 	dead_peers.clear()
 
 
+func end_game():
+	multiplayer.multiplayer_peer = null
+	# Work-around, "change_scene_to_packed()" didn't work so well
+	get_tree().change_scene_to_file(MAIN_MENU_SCENE_PATH)
+
+
+func check_game_over():
+	var is_game_over := true
+	var all_peers := multiplayer.get_peers()
+	all_peers.push_back(multiplayer.get_unique_id())
+
+	for peer_id in all_peers:
+		if not dead_peers.has(peer_id):
+			is_game_over = false
+			break
+
+	if is_game_over:
+		# Terminate the server and peers
+		end_game()
+
+
 func _on_player_died(peer_id: int):
 	dead_peers.append(peer_id)
+	check_game_over()
 
 
 func _on_round_completed():
 	respawn_dead_peers()
+
+
+func _on_server_disconnected():
+	end_game()
