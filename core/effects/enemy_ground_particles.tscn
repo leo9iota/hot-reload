@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://b6na4lsxc16dn"]
+
+[ext_resource type="Texture2D" uid="uid://ceise0v03qwse" path="res://assets/effect/particles.png" id="1_r5npv"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_olsqu"]
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_s74n7"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 98, 0)
+
+[node name="EnemyGroundParticles" type="Node2D"]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_olsqu")
+amount = 10
+texture = ExtResource("1_r5npv")
+lifetime = 10.0
+one_shot = true
+explosiveness = 0.98
+fixed_fps = 0
+interpolate = false
+process_material = SubResource("ParticleProcessMaterial_s74n7")
