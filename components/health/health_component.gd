@@ -1,6 +1,7 @@
 class_name HealthComponent extends Node
 
 signal died
+signal damaged
 
 # In the 'health_component' and 'player_input_synchronizer_component',
 # we use the composition pattern
@@ -15,6 +16,7 @@ func _ready() -> void:
 
 func damage(amount: int):
 	current_health = clamp(current_health - amount, 0, max_health)
+	damaged.emit()
 
 	if current_health == 0:
 		died.emit()
