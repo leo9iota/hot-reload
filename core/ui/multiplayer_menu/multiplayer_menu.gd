@@ -40,6 +40,10 @@ func _ready() -> void:
 	multiplayer.connection_failed.connect(_on_connection_failed)
 
 	validate()
+	
+	UIAudioManager.register_buttons([
+		back_button, host_button, join_button, error_acknowledge_button
+	])
 
 
 # Validate that port is int, username is not empty, and verify that IP is valid
