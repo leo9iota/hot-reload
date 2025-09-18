@@ -10,12 +10,21 @@ var main_scene: PackedScene = preload("uid://cpcymwvh3h4ny")
 @onready var host_button: Button = %HostButton
 @onready var join_button: Button = %JoinButton
 @onready var back_button: Button = %BackButton
+@onready var error_container: MarginContainer = $ErrorContainer
+@onready var client_error_label: Label = %ClientErrorLabel
+@onready var server_error_label: Label = %ServerErrorLabel
+@onready var error_acknowledge_button: Button = %ErrorAcknowledgeButton
 
 var port: int
 var ip_address: String
+var is_connecting: bool
 
 
 func _ready() -> void:
+	error_container.visible = false
+	error_acknowledge_button.pressed.connect(
+		_on_error_acknowledge_button_pressed
+	)
 	host_button.pressed.connect(_on_host_button_pressed)
 	join_button.pressed.connect(_on_join_button_pressed)
 	back_button.pressed.connect(_on_back_button_pressed)
@@ -26,6 +35,7 @@ func _ready() -> void:
 	ip_address_text_edit.text_changed.connect(_on_text_changed)
 
 	multiplayer.connected_to_server.connect(_on_connected_to_server)
+	multiplayer.connection_failed.connect(_on_connection_failed)
 
 	validate()
 
@@ -51,10 +61,22 @@ func validate():
 	var is_valid_username: bool = not username_text_edit.text.is_empty()
 	var is_valid_ip_address: bool = not ip_address.is_empty()
 
-	host_button.disabled = not is_valid_port or not is_valid_username
-	join_button.disabled = (
-		not is_valid_port or not is_valid_username or not is_valid_ip_address
+	host_button.disabled = (
+		is_connecting or not is_valid_port or not is_valid_username
 	)
+	join_button.disabled = (
+		is_connecting
+		or not is_valid_port
+		or not is_valid_username
+		or not is_valid_ip_address
+	)
+
+
+func show_error(is_client_error: bool):
+	client_error_label.visible = is_client_error
+	server_error_label.visible = not is_client_error
+
+	error_container.visible = true
 
 
 func _on_back_button_pressed() -> void:
@@ -63,19 +85,42 @@ func _on_back_button_pressed() -> void:
 
 func _on_host_button_pressed() -> void:
 	var server_peer := ENetMultiplayerPeer.new()
-	server_peer.create_server(port)
+	var error := server_peer.create_server(port)
+
+	# Global "Error" enum
+	if error != Error.OK:
+		show_error(false)
+		return
+
 	multiplayer.multiplayer_peer = server_peer
 	get_tree().change_scene_to_packed(main_scene)
 
 
 func _on_join_button_pressed() -> void:
 	var client_peer := ENetMultiplayerPeer.new()
-	client_peer.create_client(ip_address, port)
+	var error := client_peer.create_client(ip_address, port)
+
+	if error != Error.OK:
+		show_error(true)
+		return
+
+	is_connecting = true
 	multiplayer.multiplayer_peer = client_peer
+	validate()
+
+
+func _on_error_acknowledge_button_pressed():
+	error_container.visible = false
 
 
 func _on_connected_to_server():
 	get_tree().change_scene_to_packed(main_scene)
+
+
+func _on_connection_failed():
+	is_connecting = false
+	validate()
+	show_error(true)
 
 
 func _on_text_changed():
