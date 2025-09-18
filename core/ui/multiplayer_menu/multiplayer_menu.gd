@@ -2,13 +2,13 @@ extends MarginContainer
 
 const PORT: int = 3000
 
+var main_scene: PackedScene = preload("uid://cpcymwvh3h4ny")
+
+@onready var main_menu_scene: PackedScene = load("uid://cv72gepsh2eqd")
+
 @onready var host_button: Button = %HostButton
 @onready var join_button: Button = %JoinButton
 @onready var back_button: Button = %BackButton
-
-var main_scene: PackedScene = preload("uid://cpcymwvh3h4ny")
-var main_menu_scene: PackedScene = preload("uid://cv72gepsh2eqd")
-
 
 func _ready() -> void:
 	back_button.pressed.connect(_on_back_button_pressed)

@@ -1,11 +1,13 @@
 extends Control
 
 var main_scene: PackedScene = preload("uid://cpcymwvh3h4ny")
-var multiplayer_menu_scene: PackedScene = preload("uid://bpidy5vmv2up")
+
+@onready var multiplayer_menu_scene: PackedScene = load("uid://bpidy5vmv2up")
 
 @onready var singleplayer_button: Button = %SingleplayerButton
 @onready var multiplayer_button: Button = %MultiplayerButton
 @onready var quit_button: Button = %QuitButton
+
 
 
 func _ready() -> void:
