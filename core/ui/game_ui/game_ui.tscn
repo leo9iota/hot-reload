@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://hkjc5xmcbepg"]
+[gd_scene load_steps=5 format=3 uid="uid://hkjc5xmcbepg"]
 
 [ext_resource type="Script" uid="uid://ba700x003xcwc" path="res://core/ui/game_ui/game_ui.gd" id="1_8ahmn"]
+[ext_resource type="Texture2D" uid="uid://dgubefleppgfi" path="res://assets/ui/portrait.png" id="2_phooj"]
+[ext_resource type="Texture2D" uid="uid://cim5u2gy6lol" path="res://assets/ui/portrait_clip_mask.png" id="3_beqwh"]
+[ext_resource type="Texture2D" uid="uid://ba0l43ioqpp2q" path="res://assets/player/player-medium.png" id="4_wywxf"]
 
 [node name="GameUI" type="CanvasLayer"]
 script = ExtResource("1_8ahmn")
@@ -11,12 +14,17 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_top = 40
+mouse_filter = 2
+theme_override_constants/margin_left = 48
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 48
+theme_override_constants/margin_bottom = 32
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
+mouse_filter = 2
 
 [node name="RoundCountLabel" type="Label" parent="MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
@@ -35,3 +43,44 @@ size_flags_vertical = 0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 8
 text = "30"
+
+[node name="HealthContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+mouse_filter = 2
+
+[node name="TextureRectOuter" type="TextureRect" parent="MarginContainer/HealthContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+mouse_filter = 2
+texture = ExtResource("2_phooj")
+
+[node name="TextureRectInner" type="TextureRect" parent="MarginContainer/HealthContainer/TextureRectOuter"]
+clip_children = 1
+layout_mode = 2
+offset_right = 16.0
+offset_bottom = 16.0
+mouse_filter = 2
+texture = ExtResource("3_beqwh")
+
+[node name="Sprite2D" type="Sprite2D" parent="MarginContainer/HealthContainer/TextureRectOuter/TextureRectInner"]
+position = Vector2(11, 9)
+texture = ExtResource("4_wywxf")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HealthContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 4
+
+[node name="Label" type="Label" parent="MarginContainer/HealthContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+text = "Player Name"
+
+[node name="ProgressBar" type="ProgressBar" parent="MarginContainer/HealthContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+max_value = 1.0
+show_percentage = false
