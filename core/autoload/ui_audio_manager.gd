@@ -3,7 +3,6 @@ extends Node
 @onready var button_stream_player: AudioStreamPlayer = $ButtonStreamPlayer
 
 
-
 func register_buttons(buttons: Array):
 	for button in buttons:
 		if not button.pressed.is_connected(_on_button_pressed):
