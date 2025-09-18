@@ -69,7 +69,12 @@ func respawn_dead_peers():
 
 
 func end_game():
-	multiplayer.multiplayer_peer = null
+	# Fix issue with multiplayer peer
+	# Steps to reproduce:
+	# 1. Go into multiplayer and let players die
+	# 2. Go into singleplayer
+	# 3. Error: "No multiplayer peer is assigned."
+	multiplayer.multiplayer_peer = OfflineMultiplayerPeer.new()
 	# Work-around, "change_scene_to_packed()" didn't work so well
 	get_tree().change_scene_to_file(MAIN_MENU_SCENE_PATH)
 
