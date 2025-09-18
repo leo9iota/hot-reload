@@ -137,3 +137,19 @@ health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
 shape = SubResource("CircleShape2D_c8kf1")
+
+[node name="UsernameLabel" type="Label" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(256, 0)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -128.0
+offset_top = 2.0
+offset_right = 128.0
+offset_bottom = 18.0
+grow_horizontal = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "Username"
+horizontal_alignment = 1
