@@ -8,6 +8,7 @@ extends CharacterBody2D
 @onready var hitbox_collision_shape: CollisionShape2D = %HitboxCollisionShape
 @onready var alert_sprite: Sprite2D = $AlertSprite
 @onready var hurtbox_component: HurtboxComponent = $HurtboxComponent
+@onready var hit_stream_player: AudioStreamPlayer = $HitStreamPlayer
 
 var impact_particles_scene: PackedScene = preload("uid://bsrtogn8safuu")
 var ground_particles_scene: PackedScene = preload("uid://b6na4lsxc16dn")
@@ -209,6 +210,7 @@ func acquire_target():
 
 @rpc("authority", "call_local")
 func spawn_hit_particles():
+	hit_stream_player.play()
 	var hit_particles: Node2D = impact_particles_scene.instantiate()
 	hit_particles.global_position = hurtbox_component.global_position
 	get_parent().add_child(hit_particles)

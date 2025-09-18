@@ -1,10 +1,14 @@
-[gd_scene load_steps=14 format=3 uid="uid://c3nm61v3vr63j"]
+[gd_scene load_steps=19 format=3 uid="uid://c3nm61v3vr63j"]
 
 [ext_resource type="Texture2D" uid="uid://ca0wvkeeaehjo" path="res://assets/enemy/enemy_medium.png" id="1_5yaqm"]
 [ext_resource type="Script" uid="uid://cspxds6vsxy0o" path="res://core/enemy/enemy.gd" id="1_6eu31"]
+[ext_resource type="AudioStream" uid="uid://dq1worxq2wbr3" path="res://assets/audio/hit_1.wav" id="2_63ccr"]
 [ext_resource type="PackedScene" uid="uid://cpvn3uop4kkty" path="res://components/hurtbox/hurtbox_component.tscn" id="3_2nsib"]
 [ext_resource type="PackedScene" uid="uid://u8l6rwxgkf8d" path="res://components/health/health_component.tscn" id="3_5mk0m"]
+[ext_resource type="AudioStream" uid="uid://cwjw7pixbsoc1" path="res://assets/audio/hit_2.wav" id="3_xiqkd"]
+[ext_resource type="AudioStream" uid="uid://buasxv31k62cj" path="res://assets/audio/hit_3.wav" id="4_0orpr"]
 [ext_resource type="Texture2D" uid="uid://ujwh5tgotaed" path="res://assets/enemy/attack_alert.png" id="4_tdoai"]
+[ext_resource type="AudioStream" uid="uid://tbquyvg86sqi" path="res://assets/audio/hit_4.wav" id="5_3ohxx"]
 [ext_resource type="PackedScene" uid="uid://bx1dq7x4jqnr3" path="res://components/hitbox/hitbox_component.tscn" id="5_5g8uy"]
 [ext_resource type="PackedScene" uid="uid://dyu66r3virtlt" path="res://components/hit/hit_flash_sprite_component.tscn" id="5_71r6s"]
 [ext_resource type="Shader" uid="uid://c0qqoeasdgpwv" path="res://resources/shaders/hit_flash.gdshader" id="6_06cgj"]
@@ -19,6 +23,15 @@ properties/1/replication_mode = 2
 properties/2/path = NodePath(".:current_state")
 properties/2/spawn = true
 properties/2/replication_mode = 2
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_csd5c"]
+random_pitch = 1.25
+random_volume_offset_db = 2.0
+streams_count = 4
+stream_0/stream = ExtResource("2_63ccr")
+stream_1/stream = ExtResource("3_xiqkd")
+stream_2/stream = ExtResource("4_0orpr")
+stream_3/stream = ExtResource("5_3ohxx")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5g8uy"]
 size = Vector2(16, 24)
@@ -42,6 +55,12 @@ script = ExtResource("1_6eu31")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_6eu31")
+
+[node name="HitStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_csd5c")
+volume_db = -2.0
+max_polyphony = 3
+bus = &"SFX"
 
 [node name="TargetAcquisitionTimer" type="Timer" parent="."]
 wait_time = 0.2
