@@ -23,8 +23,12 @@ func _ready():
 		input_multiplayer_authority
 	)
 
-	username_label.text = username
-
+	# Hide username in single-player mode (OfflineMultiplayerPeer)
+	if multiplayer.multiplayer_peer is OfflineMultiplayerPeer:
+		username_label.visible = false
+	else:
+		username_label.text = username
+	
 	if is_multiplayer_authority():
 		health_component.died.connect(_on_died)
 
