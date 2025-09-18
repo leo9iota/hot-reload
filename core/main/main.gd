@@ -1,6 +1,6 @@
 class_name Main extends Node
 
-const MAIN_MENU_SCENE_PATH := "res://core/ui/menu/main_menu.tscn"
+const MAIN_MENU_SCENE_PATH := "res://core/ui/main_menu/main_menu.tscn"
 
 static var background_effects: Node2D
 static var background_mask: Sprite2D
