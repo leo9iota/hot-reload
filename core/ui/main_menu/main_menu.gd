@@ -9,7 +9,6 @@ var main_scene: PackedScene = preload("uid://cpcymwvh3h4ny")
 @onready var quit_button: Button = %QuitButton
 
 
-
 func _ready() -> void:
 	singleplayer_button.pressed.connect(_on_singleplayer_button_pressed)
 	multiplayer_button.pressed.connect(_on_multiplayer_button_pressed)
@@ -22,7 +21,6 @@ func _on_singleplayer_button_pressed():
 
 func _on_multiplayer_button_pressed():
 	get_tree().change_scene_to_packed(multiplayer_menu_scene)
-
 
 
 func _on_quit_button_pressed():
