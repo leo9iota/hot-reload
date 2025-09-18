@@ -46,7 +46,9 @@ layout_mode = 2
 text = "Host Server"
 
 [node name="PortTextEdit" type="TextEdit" parent="VBoxContainer/VBoxContainer2/VBoxContainer1"]
+unique_name_in_owner = true
 layout_mode = 2
+text = "42069"
 placeholder_text = "Enter server port"
 scroll_fit_content_height = true
 
@@ -66,6 +68,7 @@ text = "Join Server"
 [node name="IPAddressTextEdit" type="TextEdit" parent="VBoxContainer/VBoxContainer2/VBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
+text = "127.0.0.1"
 placeholder_text = "Enter host IP address"
 scroll_fit_content_height = true
 

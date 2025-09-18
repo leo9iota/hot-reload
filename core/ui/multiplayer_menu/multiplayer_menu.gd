@@ -1,23 +1,60 @@
 extends MarginContainer
 
-const PORT: int = 3000
-
 var main_scene: PackedScene = preload("uid://cpcymwvh3h4ny")
 
 @onready var main_menu_scene: PackedScene = load("uid://cv72gepsh2eqd")
 
 @onready var username_text_edit: TextEdit = %UsernameTextEdit
-@onready var host_button: Button = %HostButton
+@onready var port_text_edit: TextEdit = %PortTextEdit
 @onready var ip_address_text_edit: TextEdit = %IPAddressTextEdit
+@onready var host_button: Button = %HostButton
 @onready var join_button: Button = %JoinButton
 @onready var back_button: Button = %BackButton
 
+var port: int
+var ip_address: String
+
 
 func _ready() -> void:
-	back_button.pressed.connect(_on_back_button_pressed)
 	host_button.pressed.connect(_on_host_button_pressed)
 	join_button.pressed.connect(_on_join_button_pressed)
+	back_button.pressed.connect(_on_back_button_pressed)
+
+	# Hook into text change events
+	username_text_edit.text_changed.connect(_on_text_changed)
+	port_text_edit.text_changed.connect(_on_text_changed)
+	ip_address_text_edit.text_changed.connect(_on_text_changed)
+
 	multiplayer.connected_to_server.connect(_on_connected_to_server)
+
+	validate()
+
+
+# Validate that port is int, username is not empty, and verify that IP is valid
+func validate():
+	var port_input := port_text_edit.text
+	var ip_address_input := ip_address_text_edit.text
+
+	if port_input.is_valid_int():
+		port = int(port_input)
+		if port <= 0:
+			port = -1
+	else:
+		port = -1
+
+	if ip_address_input.is_valid_ip_address():
+		ip_address = ip_address_input
+	else:
+		ip_address = ""
+
+	var is_valid_port: bool = port > 0
+	var is_valid_username: bool = not username_text_edit.text.is_empty()
+	var is_valid_ip_address: bool = not ip_address.is_empty()
+
+	host_button.disabled = not is_valid_port or not is_valid_username
+	join_button.disabled = (
+		not is_valid_port or not is_valid_username or not is_valid_ip_address
+	)
 
 
 func _on_back_button_pressed() -> void:
@@ -26,16 +63,20 @@ func _on_back_button_pressed() -> void:
 
 func _on_host_button_pressed() -> void:
 	var server_peer := ENetMultiplayerPeer.new()
-	server_peer.create_server(PORT)
+	server_peer.create_server(port)
 	multiplayer.multiplayer_peer = server_peer
 	get_tree().change_scene_to_packed(main_scene)
 
 
 func _on_join_button_pressed() -> void:
 	var client_peer := ENetMultiplayerPeer.new()
-	client_peer.create_client("127.0.0.1", PORT)
+	client_peer.create_client(ip_address, port)
 	multiplayer.multiplayer_peer = client_peer
 
 
 func _on_connected_to_server():
 	get_tree().change_scene_to_packed(main_scene)
+
+
+func _on_text_changed():
+	validate()
