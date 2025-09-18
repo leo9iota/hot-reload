@@ -15,8 +15,6 @@ var main_scene: PackedScene = preload("uid://cpcymwvh3h4ny")
 @onready var server_error_label: Label = %ServerErrorLabel
 @onready var error_acknowledge_button: Button = %ErrorAcknowledgeButton
 
-var port: int
-var ip_address: String
 var is_connecting: bool
 
 
@@ -34,6 +32,10 @@ func _ready() -> void:
 	port_text_edit.text_changed.connect(_on_text_changed)
 	ip_address_text_edit.text_changed.connect(_on_text_changed)
 
+	username_text_edit.text = MultiplayerConfig.username
+	port_text_edit.text = str(MultiplayerConfig.port)
+	ip_address_text_edit.text = MultiplayerConfig.ip_address
+
 	multiplayer.connected_to_server.connect(_on_connected_to_server)
 	multiplayer.connection_failed.connect(_on_connection_failed)
 
@@ -46,20 +48,22 @@ func validate():
 	var ip_address_input := ip_address_text_edit.text
 
 	if port_input.is_valid_int():
-		port = int(port_input)
-		if port <= 0:
-			port = -1
+		MultiplayerConfig.port = int(port_input)
+		if MultiplayerConfig.port <= 0:
+			MultiplayerConfig.port = -1
 	else:
-		port = -1
+		MultiplayerConfig.port = -1
 
 	if ip_address_input.is_valid_ip_address():
-		ip_address = ip_address_input
+		MultiplayerConfig.ip_address = ip_address_input
 	else:
-		ip_address = ""
+		MultiplayerConfig.ip_address = ""
 
-	var is_valid_port: bool = port > 0
-	var is_valid_username: bool = not username_text_edit.text.is_empty()
-	var is_valid_ip_address: bool = not ip_address.is_empty()
+	MultiplayerConfig.username = username_text_edit.text
+
+	var is_valid_port: bool = MultiplayerConfig.port > 0
+	var is_valid_username: bool = not MultiplayerConfig.username.is_empty()
+	var is_valid_ip_address: bool = not MultiplayerConfig.ip_address.is_empty()
 
 	host_button.disabled = (
 		is_connecting or not is_valid_port or not is_valid_username
@@ -85,7 +89,7 @@ func _on_back_button_pressed() -> void:
 
 func _on_host_button_pressed() -> void:
 	var server_peer := ENetMultiplayerPeer.new()
-	var error := server_peer.create_server(port)
+	var error := server_peer.create_server(MultiplayerConfig.port)
 
 	# Global "Error" enum
 	if error != Error.OK:
@@ -98,7 +102,9 @@ func _on_host_button_pressed() -> void:
 
 func _on_join_button_pressed() -> void:
 	var client_peer := ENetMultiplayerPeer.new()
-	var error := client_peer.create_client(ip_address, port)
+	var error := client_peer.create_client(
+		MultiplayerConfig.ip_address, MultiplayerConfig.port
+	)
 
 	if error != Error.OK:
 		show_error(true)
