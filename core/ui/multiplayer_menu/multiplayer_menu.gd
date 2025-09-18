@@ -5,8 +5,8 @@ const PORT: int = 3000
 @onready var host_button: Button = %HostButton
 @onready var join_button: Button = %JoinButton
 
-
 var main_scene: PackedScene = preload("uid://cpcymwvh3h4ny")
+
 
 func _ready() -> void:
 	host_button.pressed.connect(_on_host_button_pressed)
