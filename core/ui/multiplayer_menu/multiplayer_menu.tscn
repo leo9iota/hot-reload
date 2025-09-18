@@ -14,17 +14,62 @@ theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 script = ExtResource("1_7v37v")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(256, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme_override_constants/separation = 32
 
-[node name="HostButton" type="Button" parent="HBoxContainer"]
+[node name="VBoxContainer1" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="UsernameLabel" type="Label" parent="VBoxContainer/VBoxContainer1"]
+layout_mode = 2
+text = "Username"
+
+[node name="UsernameTextEdit" type="TextEdit" parent="VBoxContainer/VBoxContainer1"]
+unique_name_in_owner = true
+layout_mode = 2
+placeholder_text = "Enter username"
+scroll_fit_content_height = true
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer1" type="VBoxContainer" parent="VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HostLabel" type="Label" parent="VBoxContainer/VBoxContainer2/VBoxContainer1"]
+layout_mode = 2
+text = "Host Server"
+
+[node name="PortTextEdit" type="TextEdit" parent="VBoxContainer/VBoxContainer2/VBoxContainer1"]
+layout_mode = 2
+placeholder_text = "Enter server port"
+scroll_fit_content_height = true
+
+[node name="HostButton" type="Button" parent="VBoxContainer/VBoxContainer2/VBoxContainer1"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Host"
 
-[node name="JoinButton" type="Button" parent="HBoxContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="JoinLabel" type="Label" parent="VBoxContainer/VBoxContainer2/VBoxContainer2"]
+layout_mode = 2
+text = "Join Server"
+
+[node name="IPAddressTextEdit" type="TextEdit" parent="VBoxContainer/VBoxContainer2/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+placeholder_text = "Enter host IP address"
+scroll_fit_content_height = true
+
+[node name="JoinButton" type="Button" parent="VBoxContainer/VBoxContainer2/VBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Join"
