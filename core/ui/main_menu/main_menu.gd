@@ -1,6 +1,7 @@
 extends Control
 
 var main_scene: PackedScene = preload("uid://cpcymwvh3h4ny")
+var multiplayer_menu_scene: PackedScene = preload("uid://bpidy5vmv2up")
 
 @onready var singleplayer_button: Button = %SingleplayerButton
 @onready var multiplayer_button: Button = %MultiplayerButton
@@ -18,7 +19,8 @@ func _on_singleplayer_button_pressed():
 
 
 func _on_multiplayer_button_pressed():
-	pass
+	get_tree().change_scene_to_packed(multiplayer_menu_scene)
+
 
 
 func _on_quit_button_pressed():
