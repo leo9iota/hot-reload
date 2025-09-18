@@ -9,17 +9,21 @@ var player_input_synchronizer_component: PlayerInputSynchronizerComponent = $Pla
 @onready var visuals: Node2D = $Visuals
 @onready var recoil_animation: AnimationPlayer = $RecoilAnimation
 @onready var barrel_position: Marker2D = %BarrelPosition
+@onready var username_label: Label = %UsernameLabel
 
 var bullet_scene: PackedScene = preload("uid://clscgesvupype")
 var muzzle_flash_scene: PackedScene = preload("uid://drj72jf88qsqe")
 var input_multiplayer_authority: int
 var is_dying: bool
+var username: String
 
 
 func _ready():
 	player_input_synchronizer_component.set_multiplayer_authority(
 		input_multiplayer_authority
 	)
+
+	username_label.text = username
 
 	if is_multiplayer_authority():
 		health_component.died.connect(_on_died)
@@ -37,6 +41,10 @@ func _process(_delta: float) -> void:
 		move_and_slide()
 		if player_input_synchronizer_component.is_attack_pressed:
 			try_fire_bullet()
+
+
+func set_username(username_input: String):
+	username = username_input
 
 
 func update_aim_position():
