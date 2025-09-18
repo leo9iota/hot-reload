@@ -10,6 +10,7 @@ var player_input_synchronizer_component: PlayerInputSynchronizerComponent = $Pla
 @onready var recoil_animation: AnimationPlayer = $RecoilAnimation
 @onready var barrel_position: Marker2D = %BarrelPosition
 @onready var username_label: Label = %UsernameLabel
+@onready var weapon_stream_player: AudioStreamPlayer = $WeaponStreamPlayer
 
 var bullet_scene: PackedScene = preload("uid://clscgesvupype")
 var muzzle_flash_scene: PackedScene = preload("uid://drj72jf88qsqe")
@@ -100,6 +101,8 @@ func play_fire_effect():
 	# Only shake camera when player that is firing gun fires gun
 	if player_input_synchronizer_component.is_multiplayer_authority():
 		GameCamera.shake(1)
+		
+	weapon_stream_player.play()
 
 
 @rpc("authority", "call_local", "reliable")
