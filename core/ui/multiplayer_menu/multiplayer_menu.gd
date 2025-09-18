@@ -6,7 +6,9 @@ var main_scene: PackedScene = preload("uid://cpcymwvh3h4ny")
 
 @onready var main_menu_scene: PackedScene = load("uid://cv72gepsh2eqd")
 
+@onready var username_text_edit: TextEdit = %UsernameTextEdit
 @onready var host_button: Button = %HostButton
+@onready var ip_address_text_edit: TextEdit = %IPAddressTextEdit
 @onready var join_button: Button = %JoinButton
 @onready var back_button: Button = %BackButton
 
