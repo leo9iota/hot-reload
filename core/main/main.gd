@@ -34,10 +34,11 @@ func _ready():
 		return player
 
 	peer_ready.rpc_id(1)
-	enemy_manager.round_completed.connect(_on_round_completed)
 	multiplayer.server_disconnected.connect(_on_server_disconnected)
 
 	if is_multiplayer_authority():
+		enemy_manager.round_completed.connect(_on_round_completed)
+		enemy_manager.game_completed.connect(_on_game_completed)
 		multiplayer.peer_disconnected.connect(_on_peer_disconnected)
 
 
@@ -106,3 +107,8 @@ func _on_peer_disconnected(peer_id: int):
 			player.client_kill_player()
 
 		player_dictionary.erase(peer_id)
+
+
+# Signal handler for "_on_game_completed" signal
+func _on_game_completed():
+	end_game()
