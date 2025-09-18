@@ -15,6 +15,7 @@ var player_scene: PackedScene = preload("uid://bq3ewxhqr2hif")
 
 var dead_peers: Array[int] = []
 var player_dictionary: Dictionary[int, Player] = {}
+var username_dictionary: Dictionary[int, String] = {}
 
 
 func _ready():
@@ -23,6 +24,7 @@ func _ready():
 
 	multiplayer_spawner.spawn_function = func(data):
 		var player = player_scene.instantiate() as Player
+		player.set_username(data.username)
 		player.name = str(data.peer_id)
 		player.input_multiplayer_authority = (data.peer_id)
 		player.global_position = (player_spawn_position.global_position)
@@ -33,7 +35,7 @@ func _ready():
 		player_dictionary[data.peer_id] = player
 		return player
 
-	peer_ready.rpc_id(1)
+	peer_ready.rpc_id(1, MultiplayerConfig.username)
 	multiplayer.server_disconnected.connect(_on_server_disconnected)
 
 	if is_multiplayer_authority():
@@ -43,9 +45,12 @@ func _ready():
 
 
 @rpc("any_peer", "call_local", "reliable")
-func peer_ready():
+func peer_ready(username: String):
 	var sender_id = multiplayer.get_remote_sender_id()
-	multiplayer_spawner.spawn({"peer_id": sender_id})
+	username_dictionary[sender_id] = username
+	multiplayer_spawner.spawn(
+		{"peer_id": sender_id, "username": username_dictionary[sender_id]}
+	)
 	enemy_manager.sync_server(sender_id)
 
 
@@ -56,7 +61,9 @@ func respawn_dead_peers():
 		if not all_peers.has(peer_id):
 			continue
 
-		multiplayer_spawner.spawn({"peer_id": peer_id})
+		multiplayer_spawner.spawn(
+			{"peer_id": peer_id, "username": username_dictionary[peer_id]}
+		)
 
 	dead_peers.clear()
 
