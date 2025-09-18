@@ -14,6 +14,10 @@ func _ready() -> void:
 	multiplayer_button.pressed.connect(_on_multiplayer_button_pressed)
 	quit_button.pressed.connect(_on_quit_button_pressed)
 
+	UIAudioManager.register_buttons(
+		[singleplayer_button, multiplayer_button, quit_button]
+	)
+
 
 func _on_singleplayer_button_pressed():
 	get_tree().change_scene_to_packed(main_scene)
