@@ -27,13 +27,16 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="SingleplayerButton" type="Button" parent="VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Single-player"
 
 [node name="MultiplayerButton" type="Button" parent="VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Multiplayer"
 
 [node name="QuitButton" type="Button" parent="VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Quit"
