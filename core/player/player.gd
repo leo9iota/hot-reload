@@ -84,6 +84,10 @@ func play_fire_effect():
 	muzzle_flash.global_position = (barrel_position.global_position)
 	muzzle_flash.rotation = (barrel_position.global_rotation)
 	get_parent().add_child(muzzle_flash)
+	
+	# Only shake camera when player that is firing gun fires gun
+	if player_input_synchronizer_component.is_multiplayer_authority():
+		GameCamera.shake(1)
 
 
 @rpc("authority", "call_local", "reliable")
