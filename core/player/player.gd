@@ -29,7 +29,7 @@ func _ready():
 		username_label.visible = false
 	else:
 		username_label.text = username
-	
+
 	if is_multiplayer_authority():
 		health_component.died.connect(_on_died)
 
@@ -101,7 +101,7 @@ func play_fire_effect():
 	# Only shake camera when player that is firing gun fires gun
 	if player_input_synchronizer_component.is_multiplayer_authority():
 		GameCamera.shake(1)
-		
+
 	weapon_stream_player.play()
 
 
