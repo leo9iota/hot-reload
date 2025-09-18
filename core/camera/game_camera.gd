@@ -32,8 +32,8 @@ func _process(delta: float) -> void:
 		Vector2(offset_sample_x, offset_sample_y)
 		* shake_strength
 		* current_shake_percentage
-		* current_shake_percentage # Multiply twice for a more natural cam shake
-	)
+		* current_shake_percentage
+	)  # Multiply twice for a more natural cam shake
 
 	current_shake_percentage = max(
 		current_shake_percentage - (SHAKE_DECAY_RATE * delta), 0
