@@ -2,11 +2,13 @@ class_name EnemyManager extends Node
 
 signal round_changed(round_number: int)
 signal round_completed
+signal game_completed
 
 const ROUND_BASE_TIME: int = 10
 const ROUND_GROWTH: int = 5
 const BASE_ENEMY_SPAWN_TIME: float = 2
 const ENEMY_SPAWN_TIME_GROWTH: float = -0.15
+const MAX_ROUNDS: int = 50
 
 @export var enemy_scene: PackedScene
 @export var enemy_spawn_root: Node
@@ -96,7 +98,17 @@ func check_round_completed():
 
 	if spawned_enemies == 0:
 		round_completed.emit()
-		begin_round()
+
+		if round_count == MAX_ROUNDS:
+			complete_game()
+		else:
+			begin_round()
+
+
+func complete_game():
+	# Create timer node in scene tree and wait for 2 secs
+	await get_tree().create_timer(2).timeout
+	game_completed.emit()
 
 
 func get_random_spawn_position() -> Vector2:
@@ -123,7 +135,6 @@ func _on_round_timer_timeout():
 	if is_multiplayer_authority():
 		spawn_interval_timer.stop()
 		check_round_completed()
-		print("Round over")
 
 
 func _on_enemy_died():
