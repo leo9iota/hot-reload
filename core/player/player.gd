@@ -16,6 +16,7 @@ var bullet_scene: PackedScene = preload("uid://clscgesvupype")
 var muzzle_flash_scene: PackedScene = preload("uid://drj72jf88qsqe")
 var input_multiplayer_authority: int
 var is_dying: bool
+var is_respawn: bool
 var username: String
 
 
@@ -25,12 +26,18 @@ func _ready():
 	)
 
 	# Hide username in single-player mode (OfflineMultiplayerPeer)
-	if multiplayer.multiplayer_peer is OfflineMultiplayerPeer:
+	if (
+		multiplayer.multiplayer_peer is OfflineMultiplayerPeer
+		or player_input_synchronizer_component.is_multiplayer_authority()
+	):
 		username_label.visible = false
 	else:
 		username_label.text = username
 
 	if is_multiplayer_authority():
+		if is_respawn:
+			health_component.current_health = 1
+
 		health_component.died.connect(_on_died)
 
 
