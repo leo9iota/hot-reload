@@ -42,7 +42,9 @@ func _ready():
 		player_dictionary[data.peer_id] = player
 		return player
 
-	peer_ready.rpc_id(MultiplayerPeer.TARGET_PEER_SERVER, MultiplayerConfig.username)
+	peer_ready.rpc_id(
+		MultiplayerPeer.TARGET_PEER_SERVER, MultiplayerConfig.username
+	)
 	multiplayer.server_disconnected.connect(_on_server_disconnected)
 
 	if is_multiplayer_authority():
