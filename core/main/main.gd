@@ -13,6 +13,7 @@ var player_scene: PackedScene = preload("uid://bq3ewxhqr2hif")
 @onready var _background_effects: Node2D = $BackgroundEffects
 @onready var _background_mask: Sprite2D = %BackgroundMask
 @onready var game_ui: GameUI = $GameUI
+@onready var pause_menu: PauseMenu = $PauseMenu
 
 var dead_peers: Array[int] = []
 var player_dictionary: Dictionary[int, Player] = {}
@@ -45,6 +46,7 @@ func _ready():
 	peer_ready.rpc_id(
 		MultiplayerPeer.TARGET_PEER_SERVER, MultiplayerConfig.username
 	)
+	pause_menu.quit_requested.connect(_on_quit_requested)
 	multiplayer.server_disconnected.connect(_on_server_disconnected)
 
 	if is_multiplayer_authority():
@@ -86,7 +88,8 @@ func respawn_dead_peers():
 
 
 func end_game():
-	# Fix issue with multiplayer peer
+	get_tree().paused = false
+	# FIXME: Fix issue with multiplayer peer
 	# Steps to reproduce:
 	# 1. Go into multiplayer and let players die
 	# 2. Go into singleplayer
@@ -140,4 +143,8 @@ func _on_peer_disconnected(peer_id: int):
 
 # Signal handler for "_on_game_completed" signal
 func _on_game_completed():
+	end_game()
+
+
+func _on_quit_requested():
 	end_game()
