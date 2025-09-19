@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cpcymwvh3h4ny"]
+[gd_scene load_steps=14 format=3 uid="uid://cpcymwvh3h4ny"]
 
 [ext_resource type="Script" uid="uid://dxt7wy02xkq4o" path="res://core/main/main.gd" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://bf7trdkyj6jdh" path="res://core/enemy_manager/enemy_manager.tscn" id="2_h2yge"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://hkjc5xmcbepg" path="res://core/ui/game_ui/game_ui.tscn" id="3_yibi5"]
 [ext_resource type="PackedScene" uid="uid://dbv8ohf8r0lpl" path="res://core/camera/game_camera.tscn" id="4_81xgm"]
 [ext_resource type="Texture2D" uid="uid://bujbjdiqgrtv6" path="res://assets/effect/clip_mask.png" id="5_k5wvu"]
+[ext_resource type="PackedScene" uid="uid://ddw5eom8uifpe" path="res://core/ui/pause_menu/pause_menu.tscn" id="7_qctb3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h2yge"]
 size = Vector2(32, 343)
@@ -38,6 +39,10 @@ spawn_path = NodePath("../YSortRoot")
 
 [node name="GameUI" parent="." node_paths=PackedStringArray("enemy_manager") instance=ExtResource("3_yibi5")]
 enemy_manager = NodePath("../EnemyManager")
+
+[node name="PauseMenu" parent="." instance=ExtResource("7_qctb3")]
+layer = 2
+visible = false
 
 [node name="GameCamera" parent="." instance=ExtResource("4_81xgm")]
 position = Vector2(320, 180)
