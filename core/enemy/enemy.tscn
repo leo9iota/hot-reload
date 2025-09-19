@@ -56,6 +56,9 @@ script = ExtResource("1_6eu31")
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_6eu31")
 
+[node name="HealthComponent" parent="." instance=ExtResource("3_5mk0m")]
+max_health = 5
+
 [node name="HitStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_csd5c")
 volume_db = -2.0
@@ -73,9 +76,6 @@ one_shot = true
 [node name="ChargeAttackTimer" type="Timer" parent="."]
 wait_time = 0.5
 one_shot = true
-
-[node name="HealthComponent" parent="." instance=ExtResource("3_5mk0m")]
-max_health = 2
 
 [node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_2nsib")]
 position = Vector2(0, -12)
