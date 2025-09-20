@@ -7,13 +7,14 @@ static var background_mask: Sprite2D
 
 var player_scene: PackedScene = preload("uid://bq3ewxhqr2hif")
 
-@onready var multiplayer_spawner: MultiplayerSpawner = $MultiplayerSpawner
-@onready var player_spawn_position: Marker2D = $PlayerSpawnPosition
+@onready var lobby_manager: LobbyManager = $LobbyManager
 @onready var enemy_manager: EnemyManager = $EnemyManager
-@onready var _background_effects: Node2D = $BackgroundEffects
-@onready var _background_mask: Sprite2D = %BackgroundMask
+@onready var multiplayer_spawner: MultiplayerSpawner = $MultiplayerSpawner
 @onready var game_ui: GameUI = $GameUI
 @onready var pause_menu: PauseMenu = $PauseMenu
+@onready var player_spawn_position: Marker2D = $PlayerSpawnPosition
+@onready var _background_effects: Node2D = $BackgroundEffects
+@onready var _background_mask: Sprite2D = %BackgroundMask
 
 var dead_peers: Array[int] = []
 var player_dictionary: Dictionary[int, Player] = {}
@@ -48,6 +49,7 @@ func _ready():
 	)
 	pause_menu.quit_requested.connect(_on_quit_requested)
 	multiplayer.server_disconnected.connect(_on_server_disconnected)
+	lobby_manager.all_peers_ready.connect(_on_all_peers_ready)
 
 	if is_multiplayer_authority():
 		enemy_manager.round_completed.connect(_on_round_completed)
@@ -148,3 +150,8 @@ func _on_game_completed():
 
 func _on_quit_requested():
 	end_game()
+
+
+func _on_all_peers_ready():
+	lobby_manager.close_lobby()
+	enemy_manager.start()
