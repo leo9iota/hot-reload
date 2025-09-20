@@ -33,7 +33,7 @@ func _ready() -> void:
 		# Call deferred to ensure that the "_ready" method in main.gd emits
 		# first before we emit this signal.
 		all_peers_ready.emit.call_deferred()
-		
+
 	multiplayer.peer_connected.connect(_on_peer_connected)
 	emit_peer_ready_states_changed.call_deferred()
 
@@ -48,14 +48,11 @@ func close_lobby():
 	is_lobby_closed = true
 
 
-
 func emit_peer_ready_states_changed():
 	# We add 1, because we're excluding the current peer
 	var connected_peer_count: int = multiplayer.get_peers().size() + 1
-	peer_ready_states_changed.emit(
-		ready_peer_ids.size(), connected_peer_count
-	)
-	
+	peer_ready_states_changed.emit(ready_peer_ids.size(), connected_peer_count)
+
 
 @rpc("authority", "call_local", "reliable")
 func set_peer_ready(peer_id: int):
@@ -93,16 +90,18 @@ func check_all_peers_ready() -> bool:
 
 	return true
 
+
 func _on_peer_connected(_peer_id: int):
 	if is_lobby_closed:
 		return
-		
+
 	emit_peer_ready_states_changed()
+
 
 func _on_peer_disconnected(peer_id: int):
 	if is_lobby_closed:
 		return
-		
+
 	if ready_peer_ids.has(peer_id):
 		ready_peer_ids.erase(peer_id)
 		emit_peer_ready_states_changed()
