@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cpcymwvh3h4ny"]
+[gd_scene load_steps=16 format=3 uid="uid://cpcymwvh3h4ny"]
 
 [ext_resource type="Script" uid="uid://dxt7wy02xkq4o" path="res://core/main/main.gd" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://dh7bufp3hyvnv" path="res://core/manager/lobby_manager/lobby_manager.tscn" id="2_5alkf"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dbv8ohf8r0lpl" path="res://core/camera/game_camera.tscn" id="4_81xgm"]
 [ext_resource type="Texture2D" uid="uid://bujbjdiqgrtv6" path="res://assets/effect/clip_mask.png" id="5_k5wvu"]
 [ext_resource type="PackedScene" uid="uid://ddw5eom8uifpe" path="res://core/ui/pause_menu/pause_menu.tscn" id="7_qctb3"]
+[ext_resource type="PackedScene" uid="uid://b83p8urmsoy5w" path="res://core/manager/upgrade_manager/upgrade_manager.tscn" id="9_vxc0a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h2yge"]
 size = Vector2(32, 343)
@@ -40,6 +41,11 @@ spawn_path = NodePath("../YSortRoot")
 enemy_spawn_root = NodePath("../YSortRoot")
 spawn_rect = NodePath("../EnemySpawnArea")
 
+[node name="UpgradeManager" parent="." node_paths=PackedStringArray("enemy_manager", "spawn_position", "spawn_root") instance=ExtResource("9_vxc0a")]
+enemy_manager = NodePath("../EnemyManager")
+spawn_position = NodePath("../CenterPosition")
+spawn_root = NodePath("../YSortRoot")
+
 [node name="GameUI" parent="." node_paths=PackedStringArray("enemy_manager", "lobby_manager") instance=ExtResource("3_yibi5")]
 enemy_manager = NodePath("../EnemyManager")
 lobby_manager = NodePath("../LobbyManager")
@@ -52,7 +58,7 @@ visible = false
 position = Vector2(320, 180)
 metadata/_edit_lock_ = true
 
-[node name="PlayerSpawnPosition" type="Marker2D" parent="."]
+[node name="CenterPosition" type="Marker2D" parent="."]
 position = Vector2(320, 185)
 metadata/_edit_lock_ = true
 
