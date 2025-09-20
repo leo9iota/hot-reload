@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="UpgradeResource" load_steps=2 format=3 uid="uid://k1uu5yi30o4m"]
+
+[ext_resource type="Script" uid="uid://75xh0r0w331" path="res://resources/upgrade/upgrade_resource.gd" id="1_2x3fg"]
+
+[resource]
+script = ExtResource("1_2x3fg")
+id = "fire_rate"
+name = "Increased Fire Rate"
+description = "Fire rate increase by 25%."
+metadata/_custom_type_script = "uid://75xh0r0w331"
