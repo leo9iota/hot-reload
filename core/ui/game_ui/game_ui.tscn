@@ -20,43 +20,77 @@ theme_override_constants/margin_top = 32
 theme_override_constants/margin_right = 48
 theme_override_constants/margin_bottom = 32
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="ReadyUpContainer" type="VBoxContainer" parent="MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+
+[node name="ReadyLabel" type="Label" parent="MarginContainer/ReadyUpContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.11764706, 1, 0.6627451, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+text = "Ready"
+horizontal_alignment = 1
+
+[node name="NotReadyLabel" type="Label" parent="MarginContainer/ReadyUpContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.41960785, 0.41960785, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+text = "Not Ready"
+horizontal_alignment = 1
+
+[node name="ReadyCountLabel" type="Label" parent="MarginContainer/ReadyUpContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+text = "1/4 Ready"
+horizontal_alignment = 1
+
+[node name="RoundInfoContainer" type="VBoxContainer" parent="MarginContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 mouse_filter = 2
 
-[node name="RoundCountLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="RoundCountLabel" type="Label" parent="MarginContainer/RoundInfoContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 8
-text = "Round 1"
+text = "Round Count"
 
-[node name="RoundTimerLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="RoundTimerLabel" type="Label" parent="MarginContainer/RoundInfoContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 8
-text = "30"
+text = "Round Timer"
 
-[node name="HealthContainer" type="HBoxContainer" parent="MarginContainer"]
+[node name="PlayerInfoContainer" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 mouse_filter = 2
 
-[node name="TextureRectOuter" type="TextureRect" parent="MarginContainer/HealthContainer"]
+[node name="PlayerPortrait" type="TextureRect" parent="MarginContainer/PlayerInfoContainer"]
 layout_mode = 2
 size_flags_vertical = 0
 mouse_filter = 2
 texture = ExtResource("2_phooj")
 
-[node name="TextureRectInner" type="TextureRect" parent="MarginContainer/HealthContainer/TextureRectOuter"]
+[node name="TextureRectInner" type="TextureRect" parent="MarginContainer/PlayerInfoContainer/PlayerPortrait"]
 clip_children = 1
 layout_mode = 0
 offset_right = 16.0
@@ -64,23 +98,23 @@ offset_bottom = 16.0
 mouse_filter = 2
 texture = ExtResource("3_beqwh")
 
-[node name="Sprite2D" type="Sprite2D" parent="MarginContainer/HealthContainer/TextureRectOuter/TextureRectInner"]
+[node name="Sprite2D" type="Sprite2D" parent="MarginContainer/PlayerInfoContainer/PlayerPortrait/TextureRectInner"]
 position = Vector2(11, 9)
 texture = ExtResource("4_wywxf")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HealthContainer"]
+[node name="HealthInfoContainer" type="VBoxContainer" parent="MarginContainer/PlayerInfoContainer"]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 4
 
-[node name="UsernameLabel" type="Label" parent="MarginContainer/HealthContainer/VBoxContainer"]
+[node name="UsernameLabel" type="Label" parent="MarginContainer/PlayerInfoContainer/HealthInfoContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 8
 text = "Player Name"
 
-[node name="HealthBar" type="ProgressBar" parent="MarginContainer/HealthContainer/VBoxContainer"]
+[node name="HealthBar" type="ProgressBar" parent="MarginContainer/PlayerInfoContainer/HealthInfoContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(96, 0)
 layout_mode = 2
