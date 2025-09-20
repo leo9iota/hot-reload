@@ -12,7 +12,7 @@ var player_scene: PackedScene = preload("uid://bq3ewxhqr2hif")
 @onready var multiplayer_spawner: MultiplayerSpawner = $MultiplayerSpawner
 @onready var game_ui: GameUI = $GameUI
 @onready var pause_menu: PauseMenu = $PauseMenu
-@onready var player_spawn_position: Marker2D = $PlayerSpawnPosition
+@onready var center_position: Marker2D = $CenterPosition
 @onready var _background_effects: Node2D = $BackgroundEffects
 @onready var _background_mask: Sprite2D = %BackgroundMask
 
@@ -30,7 +30,7 @@ func _ready():
 		player.set_username(data.username)
 		player.name = str(data.peer_id)
 		player.input_multiplayer_authority = (data.peer_id)
-		player.global_position = (player_spawn_position.global_position)
+		player.global_position = (center_position.global_position)
 
 		if multiplayer.get_unique_id() == data.peer_id:
 			game_ui.connect_player(player)
