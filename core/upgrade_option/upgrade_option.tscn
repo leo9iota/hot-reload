@@ -14,7 +14,7 @@ radius = 8.0
 script = ExtResource("1_gjtt6")
 
 [node name="HealthComponent" parent="." instance=ExtResource("2_6xu5l")]
-max_health = 10
+max_health = 5
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = SubResource("PlaceholderTexture2D_h4eub")
