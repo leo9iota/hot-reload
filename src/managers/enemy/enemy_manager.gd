@@ -16,6 +16,8 @@ const MAX_ROUNDS: int = 10
 @export var enemy_spawn_root: Node
 @export var spawn_rect: ReferenceRect
 @export var upgrade_manager: UpgradeManager
+@export var enemy_health_min: int = 3
+@export var enemy_health_max: int = 15
 
 @onready var spawn_interval_timer: Timer = $SpawnIntervalTimer
 @onready var round_timer: Timer = $RoundTimer
@@ -37,6 +39,8 @@ func _ready():
 	round_timer.timeout.connect(_on_round_timer_timeout)
 	GameEvents.enemy_died.connect(_on_enemy_died)
 	upgrade_manager.upgrades_completed.connect(_on_upgrades_completed)
+	if is_multiplayer_authority():
+		randomize()
 
 
 func start():
@@ -111,6 +115,13 @@ func get_random_spawn_position() -> Vector2:
 
 func spawn_enemy():
 	var enemy = enemy_scene.instantiate() as Node2D
+	# Randomize health before adding to the scene so clients receive it with replication
+	var health_node := enemy.get_node_or_null("HealthComponent")
+	if health_node != null:
+		var hp := randi_range(enemy_health_min, enemy_health_max)
+		# Set both max and current so it spawns with full randomized health
+		health_node.max_health = hp
+		health_node.current_health = hp
 	enemy.global_position = get_random_spawn_position()
 	enemy_spawn_root.add_child(enemy, true)
 	spawned_enemies += 1
