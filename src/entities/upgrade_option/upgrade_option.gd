@@ -68,7 +68,8 @@ func update_info():
 		return
 
 	title_label.text = assigned_resource.display_name
-	description_label.text = assigned_resource.description
+	# Use dynamic description based on current randomized per-level value
+	description_label.text = UpgradeManager.get_upgrade_description(assigned_resource.id)
 
 
 func kill():
