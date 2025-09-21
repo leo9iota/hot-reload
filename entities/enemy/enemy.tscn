@@ -100,6 +100,9 @@ speed_scale = 0.5
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_im2q6")
 
+[node name="HealthComponent" parent="." instance=ExtResource("2_3fvr7")]
+max_health = 2
+
 [node name="TargetAcquisitionTimer" type="Timer" parent="."]
 wait_time = 0.2
 one_shot = true
@@ -111,9 +114,6 @@ one_shot = true
 [node name="ChargeAttackTimer" type="Timer" parent="."]
 wait_time = 0.5
 one_shot = true
-
-[node name="HealthComponent" parent="." instance=ExtResource("2_3fvr7")]
-max_health = 2
 
 [node name="HitStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_t1g2p")
