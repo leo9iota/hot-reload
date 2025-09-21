@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://d26q5nwc23vey"]
 
-[ext_resource type="Script" uid="uid://dn6b6aqkyhi7c" path="res://src/managers/lobby_manager.gd" id="1_lvhkk"]
+[ext_resource type="Script" uid="uid://dn6b6aqkyhi7c" path="res://src/managers/lobby/lobby_manager.gd" id="1_lvhkk"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_lvhkk"]
 properties/0/path = NodePath(".:is_lobby_closed")

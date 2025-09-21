@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cm4vgd7citj8c"]
 
-[ext_resource type="Script" uid="uid://cwt32y7podv3c" path="res://src/managers/enemy_manager.gd" id="1_fq440"]
+[ext_resource type="Script" uid="uid://cwt32y7podv3c" path="res://src/managers/enemy/enemy_manager.gd" id="1_fq440"]
 [ext_resource type="PackedScene" uid="uid://b12cd617whow2" path="res://src/entities/enemy/enemy.tscn" id="2_46ilc"]
 
 [node name="EnemyManager" type="Node"]
