@@ -1,12 +1,12 @@
 [gd_scene load_steps=12 format=3 uid="uid://bw77affpadnt4"]
 
 [ext_resource type="Script" uid="uid://d3qlqxwt1f70r" path="res://src/core/main/main.gd" id="1_ig7tw"]
-[ext_resource type="PackedScene" uid="uid://cm4vgd7citj8c" path="res://src/managers/enemy_manager.tscn" id="2_h2yge"]
-[ext_resource type="PackedScene" uid="uid://d26q5nwc23vey" path="res://src/managers/lobby_manager.tscn" id="3_5vw27"]
+[ext_resource type="PackedScene" uid="uid://cm4vgd7citj8c" path="res://src/managers/enemy/enemy_manager.tscn" id="2_h2yge"]
+[ext_resource type="PackedScene" uid="uid://d26q5nwc23vey" path="res://src/managers/lobby/lobby_manager.tscn" id="3_5vw27"]
 [ext_resource type="PackedScene" uid="uid://kw7oa47rjrj4" path="res://src/ui/game_ui/game_ui.tscn" id="4_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://dg71gix5y7et2" path="res://src/core/camera/game_camera.tscn" id="4_7mycd"]
 [ext_resource type="PackedScene" uid="uid://ch6u886b4lq5q" path="res://src/ui/pause_menu/pause_menu.tscn" id="4_272bh"]
-[ext_resource type="PackedScene" uid="uid://dpo53w1qmdbwp" path="res://src/managers/upgrade_manager.tscn" id="4_kek77"]
+[ext_resource type="PackedScene" uid="uid://dpo53w1qmdbwp" path="res://src/managers/upgrade/upgrade_manager.tscn" id="4_kek77"]
 [ext_resource type="Texture2D" uid="uid://d0s3i7ycqjipr" path="res://assets/clip_mask.png" id="5_lquwl"]
 [ext_resource type="Texture2D" uid="uid://c14tdlqhrt3m1" path="res://assets/arena/arena.png" id="8_qgxaa"]
 
