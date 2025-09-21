@@ -77,8 +77,10 @@ offset_bottom = 277.0
 scale = Vector2(1.1424139, 1.0400007)
 mouse_filter = 2
 border_width = 3.0
+metadata/_edit_lock_ = true
 
 [node name="ArenaBorders" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
 
 [node name="StaticBody2D" type="StaticBody2D" parent="ArenaBorders"]
 position = Vector2(79, 182)
@@ -87,6 +89,7 @@ collision_mask = 0
 [node name="Left" type="CollisionShape2D" parent="ArenaBorders/StaticBody2D"]
 position = Vector2(-81, -19)
 shape = SubResource("RectangleShape2D_0xm2m")
+metadata/_edit_lock_ = true
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="ArenaBorders"]
 position = Vector2(561, 184)
@@ -95,6 +98,7 @@ collision_mask = 0
 [node name="Right" type="CollisionShape2D" parent="ArenaBorders/StaticBody2D2"]
 position = Vector2(79, -18)
 shape = SubResource("RectangleShape2D_0xm2m")
+metadata/_edit_lock_ = true
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="ArenaBorders"]
 position = Vector2(325, 39)
@@ -103,6 +107,7 @@ collision_mask = 0
 [node name="Top" type="CollisionShape2D" parent="ArenaBorders/StaticBody2D3"]
 position = Vector2(-4, -38)
 shape = SubResource("RectangleShape2D_h2yge")
+metadata/_edit_lock_ = true
 
 [node name="StaticBody2D4" type="StaticBody2D" parent="ArenaBorders"]
 position = Vector2(319, 321)
@@ -111,8 +116,10 @@ collision_mask = 0
 [node name="Bottom" type="CollisionShape2D" parent="ArenaBorders/StaticBody2D4"]
 position = Vector2(-3, 5)
 shape = SubResource("RectangleShape2D_h2yge")
+metadata/_edit_lock_ = true
 
 [node name="Boxes" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Boxes"]
 position = Vector2(79, 182)
@@ -121,6 +128,7 @@ collision_mask = 0
 [node name="TopLeft" type="CollisionShape2D" parent="Boxes/StaticBody2D"]
 position = Vector2(-23, -149.40625)
 shape = SubResource("RectangleShape2D_qgxaa")
+metadata/_edit_lock_ = true
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="Boxes"]
 position = Vector2(561, 184)
@@ -129,6 +137,7 @@ collision_mask = 0
 [node name="BottomRight" type="CollisionShape2D" parent="Boxes/StaticBody2D2"]
 position = Vector2(-506.5, 85.625)
 shape = SubResource("RectangleShape2D_fmjip")
+metadata/_edit_lock_ = true
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="Boxes"]
 position = Vector2(325, 39)
@@ -137,18 +146,22 @@ collision_mask = 0
 [node name="TopRight1" type="CollisionShape2D" parent="Boxes/StaticBody2D3"]
 position = Vector2(227.625, -8.5)
 shape = SubResource("RectangleShape2D_2dki3")
+metadata/_edit_lock_ = true
 
 [node name="TopRight2" type="CollisionShape2D" parent="Boxes/StaticBody2D3"]
 position = Vector2(264.125, 7)
 shape = SubResource("RectangleShape2D_mwd4t")
+metadata/_edit_lock_ = true
 
 [node name="BackgroundEffects" type="Node2D" parent="."]
 
 [node name="BackgroundMask" type="Sprite2D" parent="BackgroundEffects"]
 unique_name_in_owner = true
 clip_children = 1
-position = Vector2(320, 180)
+position = Vector2(318.5, 162.5)
+scale = Vector2(1.3488888, 1.1639999)
 texture = ExtResource("5_lquwl")
+metadata/_edit_lock_ = true
 
 [node name="YSortRoot" type="Node2D" parent="."]
 y_sort_enabled = true
