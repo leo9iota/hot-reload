@@ -207,8 +207,8 @@ func _randomize_upgrade_values():
 	for res in available_upgrades:
 		var id := res.id
 		if per_level_value_ranges.has(id):
-			var range: Vector2 = per_level_value_ranges[id]
-			var value := randf_range(range.x, range.y)
+			var value_range: Vector2 = per_level_value_ranges[id]
+			var value := randf_range(value_range.x, value_range.y)
 			# For integer-valued upgrades like damage, round to nearest int
 			if id == "damage":
 				value = round(value)
