@@ -15,6 +15,27 @@ var peer_id_to_upgrade_options: Dictionary[int, Array] = {}
 var peer_id_to_upgrades_acquired: Dictionary[int, Dictionary] = {}
 var outstanding_peers_to_upgrade: Array[int] = []
 
+# Per-round randomized per-level values for each upgrade id
+# Example defaults (fallbacks if not yet randomized):
+#  - movement_speed: +15% per level
+#  - fire_rate: +10% faster per level
+#  - damage: +1 damage per level
+var default_per_level_values := {
+	"movement_speed": 0.15,
+	"fire_rate": 0.10,
+	"damage": 1.0,
+}
+
+# Ranges used when randomizing values each round
+var per_level_value_ranges := {
+	"movement_speed": Vector2(0.10, 0.25), # 10%..25%
+	"fire_rate": Vector2(0.05, 0.20),      # 5%..20%
+	"damage": Vector2(1.0, 3.0),           # +1..+3
+}
+
+# Storage for the current round's randomized values (id -> float)
+var round_per_level_values: Dictionary = {}
+
 
 static func get_peer_upgrade_count(peer_id: int, upgrade_id: String) -> int:
 	if !is_instance_valid(instance):
@@ -39,6 +60,16 @@ func _ready() -> void:
 	
 	if is_multiplayer_authority():
 		multiplayer.peer_disconnected.connect(_on_peer_disconnected)
+		multiplayer.peer_connected.connect(_on_peer_connected)
+
+	# Initialize round values so they are available even before first round end
+	if is_multiplayer_authority():
+		randomize()
+		_randomize_upgrade_values()
+		_broadcast_round_values()
+	else:
+		# Non-authority will receive values from authority via RPC
+		round_per_level_values = default_per_level_values.duplicate()
 
 
 func generate_upgrade_options():
@@ -142,6 +173,10 @@ func check_upgrades_complete():
 
 
 func _on_round_completed():
+	# Randomize values and sync them to clients before showing options
+	if is_multiplayer_authority():
+		_randomize_upgrade_values()
+		_broadcast_round_values()
 	generate_upgrade_options()
 
 
@@ -153,3 +188,67 @@ func _on_peer_disconnected(peer_id: int):
 	if outstanding_peers_to_upgrade.has(peer_id):
 		outstanding_peers_to_upgrade.erase(peer_id)
 		check_upgrades_complete()
+
+func _on_peer_connected(peer_id: int):
+	# Send current values to the newly connected peer
+	if is_multiplayer_authority():
+		set_round_values.rpc_id(peer_id, round_per_level_values)
+
+
+# --- Per-round value randomization and accessors ---
+
+func _randomize_upgrade_values():
+	# Only the authority should randomize values
+	if !is_multiplayer_authority():
+		return
+
+	var new_values: Dictionary = {}
+	# Only randomize for upgrades that are currently available/configured
+	for res in available_upgrades:
+		var id := res.id
+		if per_level_value_ranges.has(id):
+			var range: Vector2 = per_level_value_ranges[id]
+			var value := randf_range(range.x, range.y)
+			# For integer-valued upgrades like damage, round to nearest int
+			if id == "damage":
+				value = round(value)
+				value = max(1.0, value) # ensure at least +1
+			new_values[id] = value
+		else:
+			# Fallback to default if no range specified
+			new_values[id] = default_per_level_values.get(id, 0.0)
+	round_per_level_values = new_values
+
+
+@rpc("authority", "call_local", "reliable")
+func set_round_values(values: Dictionary):
+	# Called by authority to sync values to clients (and itself via call_local)
+	round_per_level_values = values.duplicate(true)
+
+
+func _broadcast_round_values():
+	# Send the latest values to all peers
+	set_round_values.rpc(round_per_level_values)
+
+
+static func get_per_level_value(upgrade_id: String) -> float:
+	if not is_instance_valid(instance):
+		return 0.0
+	if instance.round_per_level_values.has(upgrade_id):
+		return instance.round_per_level_values[upgrade_id]
+	return instance.default_per_level_values.get(upgrade_id, 0.0)
+
+
+static func get_upgrade_description(upgrade_id: String) -> String:
+	var v := get_per_level_value(upgrade_id)
+	match upgrade_id:
+		"damage":
+			return "+%d" % int(round(v))
+		"movement_speed":
+			return "+%d%%" % int(round(v * 100.0))
+		"fire_rate":
+			# Shown as a positive %, indicating faster
+			return "+%d%%" % int(round(v * 100.0))
+		_:
+			# Generic format
+			return "+%s" % str(v)

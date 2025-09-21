@@ -78,7 +78,8 @@ func get_movement_speed() -> float:
 		"movement_speed"
 	)
 
-	var speed_modifier := 1 + (.15 * movement_upgrade_count)
+	var per_level := UpgradeManager.get_per_level_value("movement_speed")
+	var speed_modifier := 1 + (per_level * movement_upgrade_count)
 	
 	return BASE_MOVEMENT_SPEED * speed_modifier
 
@@ -88,8 +89,11 @@ func get_fire_rate() -> float:
 		player_input_synchronizer_component.get_multiplayer_authority(),
 		"fire_rate"
 	)
-	
-	return BASE_FIRE_RATE * (1 - (.1 * fire_rate_count))
+    
+	var per_level := UpgradeManager.get_per_level_value("fire_rate")
+	var rate := BASE_FIRE_RATE * (1 - (per_level * fire_rate_count))
+	# Prevent zero/negative values
+	return max(0.05, rate)
 
 
 func get_bullet_damage() -> int:
@@ -97,8 +101,9 @@ func get_bullet_damage() -> int:
 		player_input_synchronizer_component.get_multiplayer_authority(),
 		"damage"
 	)
-	
-	return BASE_BULLET_DAMAGE + damage_count
+    
+	var per_level := int(round(UpgradeManager.get_per_level_value("damage")))
+	return BASE_BULLET_DAMAGE + (damage_count * per_level)
 
 
 @rpc("authority", "call_local")
