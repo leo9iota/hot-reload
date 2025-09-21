@@ -2,17 +2,12 @@ extends Node
 
 @onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 
-static var instance: UIAudioManager
 
-
-func _ready() -> void:
-	instance = self
-
-
-static func register_buttons(buttons: Array):
+func register_buttons(buttons: Array):
+	# Connect provided buttons to play the UI click sound.
 	for button in buttons:
-		button.pressed.connect(instance._on_button_pressed)
+		button.pressed.connect(_on_button_pressed)
 
 
 func _on_button_pressed():
-	instance.audio_stream_player.play()
+	audio_stream_player.play()
