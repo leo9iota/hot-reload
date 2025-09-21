@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bw77affpadnt4"]
+[gd_scene load_steps=16 format=3 uid="uid://bw77affpadnt4"]
 
 [ext_resource type="Script" uid="uid://d3qlqxwt1f70r" path="res://src/core/main/main.gd" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://cm4vgd7citj8c" path="res://src/managers/enemy/enemy_manager.tscn" id="2_h2yge"]
@@ -11,10 +11,22 @@
 [ext_resource type="Texture2D" uid="uid://c14tdlqhrt3m1" path="res://assets/arena/arena.png" id="8_qgxaa"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0xm2m"]
-size = Vector2(32, 300)
+size = Vector2(32, 329)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h2yge"]
-size = Vector2(500, 32)
+size = Vector2(631, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qgxaa"]
+size = Vector2(42, 52.8125)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fmjip"]
+size = Vector2(33, 43.25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2dki3"]
+size = Vector2(32.75, 35)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mwd4t"]
+size = Vector2(33.75, 42)
 
 [node name="Main" type="Node"]
 script = ExtResource("1_ig7tw")
@@ -51,53 +63,84 @@ position = Vector2(320, 185)
 metadata/_edit_lock_ = true
 
 [node name="Arena" type="Sprite2D" parent="."]
-position = Vector2(320, 185)
+position = Vector2(319.00003, 179.00002)
+scale = Vector2(3.0203555, 2.6615689)
 texture = ExtResource("8_qgxaa")
 metadata/_edit_lock_ = true
 
 [node name="SpawnRect" type="ReferenceRect" parent="."]
 custom_minimum_size = Vector2(414, 216)
-offset_left = 113.0
-offset_top = 73.0
-offset_right = 527.0
-offset_bottom = 289.0
+offset_left = 88.0
+offset_top = 61.0
+offset_right = 502.0
+offset_bottom = 277.0
+scale = Vector2(1.1424139, 1.0400007)
 mouse_filter = 2
 border_width = 3.0
-metadata/_edit_lock_ = true
 
-[node name="StaticBodies" type="Node2D" parent="."]
+[node name="ArenaBorders" type="Node2D" parent="."]
 
-[node name="StaticBody2D" type="StaticBody2D" parent="StaticBodies"]
+[node name="StaticBody2D" type="StaticBody2D" parent="ArenaBorders"]
 position = Vector2(79, 182)
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBodies/StaticBody2D"]
+[node name="Left" type="CollisionShape2D" parent="ArenaBorders/StaticBody2D"]
+position = Vector2(-81, -19)
 shape = SubResource("RectangleShape2D_0xm2m")
-metadata/_edit_lock_ = true
 
-[node name="StaticBody2D2" type="StaticBody2D" parent="StaticBodies"]
+[node name="StaticBody2D2" type="StaticBody2D" parent="ArenaBorders"]
 position = Vector2(561, 184)
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBodies/StaticBody2D2"]
+[node name="Right" type="CollisionShape2D" parent="ArenaBorders/StaticBody2D2"]
+position = Vector2(79, -18)
 shape = SubResource("RectangleShape2D_0xm2m")
-metadata/_edit_lock_ = true
 
-[node name="StaticBody2D3" type="StaticBody2D" parent="StaticBodies"]
+[node name="StaticBody2D3" type="StaticBody2D" parent="ArenaBorders"]
 position = Vector2(325, 39)
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBodies/StaticBody2D3"]
+[node name="Top" type="CollisionShape2D" parent="ArenaBorders/StaticBody2D3"]
+position = Vector2(-4, -38)
 shape = SubResource("RectangleShape2D_h2yge")
-metadata/_edit_lock_ = true
 
-[node name="StaticBody2D4" type="StaticBody2D" parent="StaticBodies"]
+[node name="StaticBody2D4" type="StaticBody2D" parent="ArenaBorders"]
 position = Vector2(319, 321)
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBodies/StaticBody2D4"]
+[node name="Bottom" type="CollisionShape2D" parent="ArenaBorders/StaticBody2D4"]
+position = Vector2(-3, 5)
 shape = SubResource("RectangleShape2D_h2yge")
-metadata/_edit_lock_ = true
+
+[node name="Boxes" type="Node2D" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Boxes"]
+position = Vector2(79, 182)
+collision_mask = 0
+
+[node name="TopLeft" type="CollisionShape2D" parent="Boxes/StaticBody2D"]
+position = Vector2(-23, -149.40625)
+shape = SubResource("RectangleShape2D_qgxaa")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="Boxes"]
+position = Vector2(561, 184)
+collision_mask = 0
+
+[node name="BottomRight" type="CollisionShape2D" parent="Boxes/StaticBody2D2"]
+position = Vector2(-506.5, 85.625)
+shape = SubResource("RectangleShape2D_fmjip")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="Boxes"]
+position = Vector2(325, 39)
+collision_mask = 0
+
+[node name="TopRight1" type="CollisionShape2D" parent="Boxes/StaticBody2D3"]
+position = Vector2(227.625, -8.5)
+shape = SubResource("RectangleShape2D_2dki3")
+
+[node name="TopRight2" type="CollisionShape2D" parent="Boxes/StaticBody2D3"]
+position = Vector2(264.125, 7)
+shape = SubResource("RectangleShape2D_mwd4t")
 
 [node name="BackgroundEffects" type="Node2D" parent="."]
 
