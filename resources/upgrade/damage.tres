@@ -5,6 +5,6 @@
 [resource]
 script = ExtResource("1_3til0")
 id = "damage"
-display_name = "Increased Damage"
-description = "Increases damage by 1."
+display_name = "Damage"
+description = "+1"
 metadata/_custom_type_script = "uid://cir64g6rq2f5n"
