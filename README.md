@@ -4,6 +4,6 @@ Multiplayer rogue-like shooter
 
 ## Images
 
-![Menu](./images/hot-reload-1.png)
+![Menu](./.github/images/hot-reload-1.png)
 
-![Multiplayer](./images/hot-reload-2.png)
+![Multiplayer](./.github/images/hot-reload-2.png)
