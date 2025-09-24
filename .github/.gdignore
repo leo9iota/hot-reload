@@ -1,0 +1,3 @@
+# Ignore all files in this directory for Godot's import system.
+# This prevents .import files and keeps editor from processing README images.
+*
