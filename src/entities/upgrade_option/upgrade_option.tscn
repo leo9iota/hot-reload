@@ -8,7 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://dgn3fehatbp3d" path="res://assets/audio/hit_2.wav" id="4_wxtqv"]
 [ext_resource type="PackedScene" uid="uid://cskhnb5sjrumg" path="res://src/components/hit_flash/hit_flash_sprite_component.tscn" id="5_jncuo"]
 [ext_resource type="AudioStream" uid="uid://cdcbm0thalah8" path="res://assets/audio/hit_3.wav" id="5_wwg0f"]
-[ext_resource type="Shader" uid="uid://dnqnawj2p3fs4" path="res://resources/shader/hit_flash.gdshader" id="5_xoods"]
+[ext_resource type="Shader" uid="uid://dnqnawj2p3fs4" path="res://resources/shaders/hit_flash.gdshader" id="5_xoods"]
 [ext_resource type="AudioStream" uid="uid://dx2jgjubvrcom" path="res://assets/audio/hit_4.wav" id="6_c0upa"]
 
 [sub_resource type="Animation" id="Animation_jncuo"]

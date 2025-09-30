@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cskhnb5sjrumg"]
 
-[ext_resource type="Shader" uid="uid://dnqnawj2p3fs4" path="res://resources/shader/hit_flash.gdshader" id="1_0flww"]
+[ext_resource type="Shader" uid="uid://dnqnawj2p3fs4" path="res://resources/shaders/hit_flash.gdshader" id="1_0flww"]
 [ext_resource type="Script" uid="uid://w7k4dlgw7mdc" path="res://src/components/hit_flash/hit_flash_sprite_component.gd" id="3_uq75w"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_x58kc"]

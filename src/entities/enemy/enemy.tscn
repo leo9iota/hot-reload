@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://ca7d70ujba62a" path="res://src/components/hitbox/hitbox_component.tscn" id="5_4wwj3"]
 [ext_resource type="AudioStream" uid="uid://cdcbm0thalah8" path="res://assets/audio/hit_3.wav" id="5_ogeq8"]
 [ext_resource type="PackedScene" uid="uid://cskhnb5sjrumg" path="res://src/components/hit_flash/hit_flash_sprite_component.tscn" id="6_61ikd"]
-[ext_resource type="Shader" uid="uid://dnqnawj2p3fs4" path="res://resources/shader/hit_flash.gdshader" id="6_721x4"]
+[ext_resource type="Shader" uid="uid://dnqnawj2p3fs4" path="res://resources/shaders/hit_flash.gdshader" id="6_721x4"]
 [ext_resource type="AudioStream" uid="uid://dx2jgjubvrcom" path="res://assets/audio/hit_4.wav" id="6_jfjhj"]
 
 [sub_resource type="Animation" id="Animation_eaj7m"]
@@ -119,7 +119,6 @@ one_shot = true
 stream = SubResource("AudioStreamRandomizer_t1g2p")
 volume_db = -2.0
 max_polyphony = 3
-bus = &"sfx"
 
 [node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_dt443")]
 position = Vector2(0, -12)
