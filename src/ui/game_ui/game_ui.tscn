@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cwy2k3dbmlpjp" path="res://src/ui/game_ui/game_ui.gd" id="1_5rq5h"]
 [ext_resource type="Texture2D" uid="uid://c6ubis27swfqy" path="res://assets/ui/portrait.png" id="2_6u1yh"]
 [ext_resource type="Texture2D" uid="uid://cxhtrs7m60hhl" path="res://assets/ui/portrait_clip_mask.png" id="3_adpq5"]
-[ext_resource type="Texture2D" uid="uid://1sfnidv2bmry" path="res://src/entities/player/player-medium.png" id="3_xlhta"]
+[ext_resource type="Texture2D" uid="uid://1sfnidv2bmry" path="res://assets/player/player-medium.png" id="3_xlhta"]
 
 [node name="GameUI" type="CanvasLayer"]
 script = ExtResource("1_5rq5h")
