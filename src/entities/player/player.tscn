@@ -6,7 +6,6 @@
 [ext_resource type="AudioStream" uid="uid://bef4ksrelul77" path="res://assets/audio/shot_1.wav" id="3_j3ovn"]
 [ext_resource type="Texture2D" uid="uid://1sfnidv2bmry" path="res://src/entities/player/player-medium.png" id="3_sglur"]
 [ext_resource type="AudioStream" uid="uid://kesifmtbnnwe" path="res://assets/audio/shot_2.wav" id="4_afbqv"]
-[ext_resource type="Texture2D" uid="uid://bddaw5yrg0t2u" path="res://src/entities/player/rifle.png" id="4_bls4j"]
 [ext_resource type="AudioStream" uid="uid://bqbgny3bvokub" path="res://assets/audio/shot_3.wav" id="5_gx6sm"]
 [ext_resource type="PackedScene" uid="uid://n1b3fv7mjy2d" path="res://src/components/hurtbox/hurtbox_component.tscn" id="6_8fjmc"]
 [ext_resource type="AudioStream" uid="uid://c2oy8veqv6hwm" path="res://assets/audio/shot_4.wav" id="6_yqrof"]
@@ -17,6 +16,7 @@
 [ext_resource type="AudioStream" uid="uid://dgn3fehatbp3d" path="res://assets/audio/hit_2.wav" id="12_b2kln"]
 [ext_resource type="AudioStream" uid="uid://cdcbm0thalah8" path="res://assets/audio/hit_3.wav" id="13_we0b7"]
 [ext_resource type="AudioStream" uid="uid://dx2jgjubvrcom" path="res://assets/audio/hit_4.wav" id="14_mtric"]
+[ext_resource type="Texture2D" uid="uid://cg6xxb3rhgq7y" path="res://assets/guns/ak-47.png" id="16_yi0df"]
 
 [sub_resource type="Animation" id="Animation_qiwj3"]
 length = 0.001
@@ -182,7 +182,6 @@ replication_config = SubResource("SceneReplicationConfig_abrql")
 stream = SubResource("AudioStreamRandomizer_mtric")
 volume_db = -2.0
 max_polyphony = 3
-bus = &"sfx"
 
 [node name="HealthComponent" parent="." instance=ExtResource("3_fkugw")]
 max_health = 5
@@ -195,7 +194,6 @@ one_shot = true
 stream = SubResource("AudioStreamRandomizer_3wlsy")
 volume_db = -2.0
 max_polyphony = 3
-bus = &"sfx"
 
 [node name="ActivationArea" type="Area2D" parent="."]
 position = Vector2(0, -9)
@@ -219,14 +217,15 @@ position = Vector2(0, -9)
 [node name="WeaponAnimationRoot" type="Node2D" parent="Visuals/WeaponRoot"]
 position = Vector2(6, 0)
 
-[node name="Sprite2D" type="Sprite2D" parent="Visuals/WeaponRoot/WeaponAnimationRoot"]
-texture = ExtResource("4_bls4j")
+[node name="WeaponSprite" type="Sprite2D" parent="Visuals/WeaponRoot/WeaponAnimationRoot"]
+position = Vector2(-13, -2)
+scale = Vector2(0.49026334, 0.49026334)
+texture = ExtResource("16_yi0df")
 centered = false
-offset = Vector2(-13, -6)
 
 [node name="BarrelPosition" type="Marker2D" parent="Visuals/WeaponRoot/WeaponAnimationRoot"]
 unique_name_in_owner = true
-position = Vector2(18, -1)
+position = Vector2(25, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
@@ -242,7 +241,8 @@ health_component = NodePath("../HealthComponent")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
 shape = SubResource("CircleShape2D_8fjmc")
 
-[node name="DisplayNameLabel" type="Label" parent="."]
+[node name="PlayerNameLabel" type="Label" parent="."]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(128, 0)
 anchors_preset = 5
 anchor_left = 0.5
