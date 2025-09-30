@@ -1,11 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://0h7hmc6f36se"]
+[gd_scene load_steps=3 format=3 uid="uid://0h7hmc6f36se"]
 
-[ext_resource type="AudioStream" uid="uid://1bbv3wl80xoe" path="res://assets/audio/sound_tracks/bit_coast.mp3" id="1_cg7sh"]
+[ext_resource type="Script" uid="uid://c5yrfyfp8gfsf" path="res://src/autoload/music_player.gd" id="1_48r6u"]
+[ext_resource type="AudioStream" uid="uid://1bbv3wl80xoe" path="res://assets/audio/songs/bit_coast.mp3" id="1_cg7sh"]
 
 [node name="MusicPlayer" type="Node"]
 process_mode = 3
+script = ExtResource("1_48r6u")
+loop_end = 105.0
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="GameMusicPlayer" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
 stream = ExtResource("1_cg7sh")
 autoplay = true
 bus = &"Music"
+parameters/looping = true
