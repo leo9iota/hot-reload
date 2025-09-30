@@ -6,7 +6,8 @@
 [node name="MusicPlayer" type="Node"]
 process_mode = 3
 script = ExtResource("1_48r6u")
-loop_end = 105.0
+loop_end = 103.44
+use_crossfade = true
 
 [node name="GameMusicPlayer" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
