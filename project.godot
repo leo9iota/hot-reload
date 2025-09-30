@@ -17,11 +17,11 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-GameEvents="*res://src/autoload/game_events.gd"
-Background="*res://src/autoload/background.tscn"
-Cursor="*res://src/autoload/cursor.tscn"
-UIAudioManager="*res://src/autoload/ui_audio_manager.tscn"
-MusicPlayer="*res://src/autoload/music_player.tscn"
+GameEvents="*res://src/autoload/game_events/game_events.gd"
+Background="*res://src/autoload/background/background.tscn"
+Cursor="*res://src/autoload/cursor/cursor.tscn"
+UIAudioManager="*res://src/autoload/ui_audio_manager/ui_audio_manager.tscn"
+MusicPlayer="*res://src/autoload/music_player/music_player.tscn"
 
 [display]
 

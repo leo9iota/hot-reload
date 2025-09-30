@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://l1877l4lm8nh"]
 
 [ext_resource type="Texture2D" uid="uid://cybgs64gme443" path="res://assets/ui/crosshair.png" id="1_h8blf"]
-[ext_resource type="Script" uid="uid://hm5hcr6v337x" path="res://src/autoload/cursor.gd" id="1_mp8dx"]
+[ext_resource type="Script" uid="uid://hm5hcr6v337x" path="res://src/autoload/cursor/cursor.gd" id="1_mp8dx"]
 
 [node name="Cursor" type="CanvasLayer"]
 process_mode = 3

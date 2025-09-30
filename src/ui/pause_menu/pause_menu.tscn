@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://ch6u886b4lq5q"]
 
 [ext_resource type="Script" uid="uid://c7ndje0wex4uk" path="res://src/ui/pause_menu/pause_menu.gd" id="1_jbgdu"]
-[ext_resource type="PackedScene" uid="uid://dowdno32gmu8s" path="res://src/autoload/background.tscn" id="1_mnjdh"]
+[ext_resource type="PackedScene" uid="uid://dowdno32gmu8s" path="res://src/autoload/background/background.tscn" id="1_mnjdh"]
 
 [node name="PauseMenu" type="CanvasLayer"]
 process_mode = 3

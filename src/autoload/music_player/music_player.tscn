@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://0h7hmc6f36se"]
 
-[ext_resource type="Script" uid="uid://c5yrfyfp8gfsf" path="res://src/autoload/music_player.gd" id="1_48r6u"]
+[ext_resource type="Script" uid="uid://c5yrfyfp8gfsf" path="res://src/autoload/music_player/music_player.gd" id="1_48r6u"]
 [ext_resource type="AudioStream" uid="uid://1bbv3wl80xoe" path="res://assets/audio/songs/bit_coast.mp3" id="1_cg7sh"]
 
 [node name="MusicPlayer" type="Node"]
