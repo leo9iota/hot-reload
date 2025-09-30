@@ -14,12 +14,12 @@ const BASE_BULLET_DAMAGE: int = 1
 @onready var visuals: Node2D = $Visuals
 @onready var weapon_animation_player: AnimationPlayer = $WeaponAnimationPlayer
 @onready var barrel_position: Marker2D = %BarrelPosition
-@onready var display_name_label: Label = $DisplayNameLabel
 @onready var activation_area_collision_shape: CollisionShape2D = %ActivationAreaCollisionShape
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var hurtbox_component: HurtboxComponent = $HurtboxComponent
 @onready var weapon_stream_player: AudioStreamPlayer = $WeaponStreamPlayer
 @onready var hit_stream_player: AudioStreamPlayer = $HitStreamPlayer
+@onready var player_name_label: Label = %PlayerNameLabel
 
 var bullet_scene: PackedScene = preload("uid://bqjombuvx45oe")
 var muzzle_flash_scene: PackedScene = preload("uid://bo1ae6p4ggkpq")
@@ -39,9 +39,9 @@ func _ready():
 	var is_client_authority = player_input_synchronizer_component.is_multiplayer_authority()
 
 	if is_single_player || is_client_authority:
-		display_name_label.visible = false
+		player_name_label.visible = false
 	else:
-		display_name_label.text = display_name
+		player_name_label.text = display_name
 
 	if is_multiplayer_authority():
 		if is_respawn:
@@ -89,7 +89,7 @@ func get_fire_rate() -> float:
 		player_input_synchronizer_component.get_multiplayer_authority(),
 		"fire_rate"
 	)
-    
+	
 	var per_level := UpgradeManager.get_per_level_value("fire_rate")
 	var rate := BASE_FIRE_RATE * (1 - (per_level * fire_rate_count))
 	# Prevent zero/negative values
@@ -101,7 +101,7 @@ func get_bullet_damage() -> int:
 		player_input_synchronizer_component.get_multiplayer_authority(),
 		"damage"
 	)
-    
+	
 	var per_level := int(round(UpgradeManager.get_per_level_value("damage")))
 	return BASE_BULLET_DAMAGE + (damage_count * per_level)
 
