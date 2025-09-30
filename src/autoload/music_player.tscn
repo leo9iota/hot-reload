@@ -1,12 +1,11 @@
 [gd_scene load_steps=2 format=3 uid="uid://0h7hmc6f36se"]
 
-[ext_resource type="AudioStream" uid="uid://cowhfqp42hnsn" path="res://assets/audio/All Your Organs Get A Laugh.mp3" id="1_ouhko"]
+[ext_resource type="AudioStream" uid="uid://1bbv3wl80xoe" path="res://assets/audio/sound_tracks/bit_coast.mp3" id="1_cg7sh"]
 
 [node name="MusicPlayer" type="Node"]
 process_mode = 3
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("1_ouhko")
-volume_db = -10.0
+stream = ExtResource("1_cg7sh")
 autoplay = true
-bus = &"music"
+bus = &"Music"
